@@ -93,7 +93,9 @@ REFUSION introduces a novel LLM framework combining masked diffusion model (MDM)
 
 #### SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity
 
-SparseLoRA accelerates LLM fine-tuning by leveraging contextual sparsity, dynamically selecting sparse weight subsets for gradient and loss computations using a training-free SVD-based sparsity estimator. The method applies sparsity selectively across layers, tokens (denser for outputs, sparser for context) and training steps (progressively increasing after initial dense epochs) with minimal overhead. Unlike prior PEFT approaches that primarily reduce memory, SparseLoRA directly improves compute efficiency.
+SparseLoRA accelerates LLM fine-tuning by leveraging contextual sparsity, dynamically selecting sparse weight subsets for gradient and loss computations using a training-free SVD-based sparsity estimator. The method applies sparsity selectively across layers, tokens and training steps* with minimal overhead. Unlike prior PEFT approaches that primarily reduce memory, SparseLoRA directly improves compute efficiency.
+
+*Note: Initial layers benefit from being dense, while deeper layers are more redundant, thus unlocking aggressive sparsification. Context tokens can use sparse computation, but decoded tokens shall use dense computation. Training benefits from progressively increasing token and layer sparsity after initial fully dense steps.
 
 ##### Key Contributions
 1. Training-free contextual sparsity estimation enabling dynamic sparse weight selection during fine-tuning
