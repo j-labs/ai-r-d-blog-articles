@@ -151,7 +151,7 @@ This paper introduces FAE (Feature Auto-Encoder), a minimalist framework adaptin
 
 ### Section executive summary
 
-This group represents a fundamental rethinking of how AI systems approach complex reasoning and problem-solving. Rather than relying solely on scale, these works demonstrate that architectural choices, orchestration strategies and training objectives can unlock dramatically improved reasoning capabilities. ToolOrchestra shows that small models can coordinate larger ones and tools more effectively than monolithic giants, achieving superior results at a fraction of the cost. "Less is More" proves that tiny recursive networks can outperform large language models on challenging puzzles through deep iterative reasoning. LeJEPA provides theoretical grounding for self-supervised learning that removes brittle heuristics while improving robustness. These advances collectively suggest a future where reasoning capability comes not just from model size, but from principled architectural design, efficient resource orchestration and mathematically sound training procedures.
+This group represents a fundamental rethinking of how AI systems approach complex reasoning and problem-solving. Rather than relying solely on scale, these works demonstrate that architectural choices, orchestration strategies and training objectives can unlock dramatically improved reasoning capabilities. ToolOrchestra shows that small models can coordinate larger ones and tools more effectively than monolithic giants, achieving superior results at a fraction of the cost. "Less is More" proves that tiny recursive networks can outperform large language models on challenging puzzles through deep iterative reasoning. LeJEPA provides theoretical grounding for self-supervised learning that removes brittle heuristics while improving robustness. These advances collectively suggest a future where modeling capability comes not just from model size, but from principled architectural design, efficient resource orchestration and mathematically sound training procedures.
 
 ### Papers
 
@@ -177,7 +177,9 @@ This paper introduces Tiny Recursive Model (TRM), a simplified recursive reasoni
 
 #### LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics
 
-LeJEPA introduces a theoretically principled framework for self-supervised learning within the Joint-Embedding Predictive Architecture paradigm. The core insight is that isotropic Gaussian embeddings uniquely minimize downstream prediction risk across broad task families. LeJEPA combines predictive loss with Sketched Isotropic Gaussian Regularization (SIGReg), which provably enforces isotropic Gaussianity using scalable, hyperparameter-light, differentiable projection-based methods, eliminating brittle heuristics like stop-gradient and teacher-student models.
+LeJEPA introduces a theoretically principled framework for self-supervised learning within the Joint-Embedding Predictive Architecture paradigm. The core insight is that isotropic Gaussian embeddings* uniquely minimize downstream prediction risk across broad task families. LeJEPA combines predictive loss with Sketched Isotropic Gaussian Regularization (SIGReg), which provably enforces isotropic Gaussianity using scalable, hyperparameter-light, differentiable projection-based methods, eliminating brittle heuristics like stop-gradient and teacher-student models.
+
+*Note: Isotropic Gaussian embeddings have the same variance across all dimensions, ensuring optimal information capacity exploitation of every dimension.
 
 ##### Key Contributions
 1. Mathematical proof that isotropic Gaussian embeddings minimize downstream risk across task families
@@ -191,28 +193,34 @@ LeJEPA introduces a theoretically principled framework for self-supervised learn
 
 ### Section executive summary
 
-This group addresses the practical challenges of deploying AI systems at industrial scale, where efficiency, relevance and robustness are paramount. These papers bridge the gap between research advances and production systems, demonstrating how techniques from language models (context engineering, reasoning) can transform discriminative tasks like search and recommendation. OnePiece brings LLM-style reasoning to e-commerce ranking with measurable business impact, while Late Chunking solves a fundamental problem in retrieval systems by preserving document-level context. The inclusion of Imperceptible Jailbreaking serves as a critical reminder that as these systems become more capable and widely deployed, understanding their vulnerabilities becomes essential for safe production deployment. Together, these works represent the maturation of AI from research prototypes to robust, scalable systems handling billions of users.
+This group addresses the practical challenges of deploying AI systems at an industrial scale, where efficiency, relevance and robustness are essential. These papers bridge the gap between research advances and production systems, demonstrating how techniques from language models (context engineering, reasoning) can transform discriminative tasks like search and recommendation. OnePiece brings LLM-style reasoning to e-commerce ranking with measurable business impact, while Late Chunking solves a fundamental problem in retrieval systems by preserving document-level context. The inclusion of Imperceptible Jailbreaking serves as a critical reminder that as these systems become more capable and widely deployed, understanding their vulnerabilities becomes essential for safe production deployment. Together, these works represent the maturation of AI from research prototypes to robust, scalable systems handling billions of users.
 
 ### Papers
 
 #### OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System
 
-OnePiece introduces a unified framework enhancing industrial ranking systems by integrating LLM-style context engineering and reasoning. The system enriches input representations via structured context engineering (user history, preference anchors from expert knowledge, situational descriptors, candidate item sets), implements block-wise latent reasoning for multi-step bandwidth-scalable reasoning and adopts progressive multi-task training using natural feedback signals (click, add-to-cart, purchase) as supervision for reasoning stages.
+OnePiece introduces a unified framework enhancing industrial ranking systems by integrating LLM-style context engineering and reasoning. The system enriches input representations via structured context engineering (user history, preference anchors from expert knowledge, situational descriptors, candidate item sets), implements block-wise latent reasoning for multi-step bandwidth-scalable reasoning* and adopts progressive multi-task training** using natural feedback signals (click, add-to-cart, purchase) as supervision for reasoning stages.
+
+*Note: Wider information channel between reasoning steps by using multiple tokens instead of 1 as previously proposed.
+**Note: Progressiveness prevents competing gradients from multiple feedback signals.
+
 
 ##### Key Contributions
 1. Systematic adaptation of LLM paradigm mechanisms (context engineering, multi-step reasoning) to discriminative industrial ranking
 2. Block-wise latent reasoning architecture enabling scalable multi-step reasoning over rich input representations
-3. Production deployment at Shopee scale showing +2% GMV/UU and +2.9% advertising revenue with improved efficiency
-4. Superior parameter/data efficiency and hardware utilization compared to highly optimized entrenched baselines (DLRM, HSTU)
+3. Production deployment at Shopee's scale showing higher advertising revenue and user's merchandise value with improved efficiency
+4. Superior parameter/data efficiency and hardware utilization compared to highly optimized entrenched baselines (DLRM, HSTU)***
+
+***Note: DLRM is Shopee's production baseline recommendation model, while HSTU is a state-of-the-art recommendation framework from Meta.
 
 #### Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
 
-Late Chunking introduces a novel approach for generating text chunk embeddings that preserves broader contextual information by processing entire documents with long-context embedding models to produce token-level embeddings, then pooling these into chunks. Unlike traditional chunking that divides documents before embedding, this ensures each chunk representation benefits from full document context. The paper proposes scalable "long late chunking" for very large documents and introduces span pooling fine-tuning for further improvements.
+Late Chunking introduces a novel approach to the generation of text chunk embeddings that preserves broader contextual information by processing entire documents with long-context embedding models to produce token-level embeddings, then splitting these into chunks. Unlike traditional chunking that divides documents before embedding, this ensures each chunk representation benefits from the full document context. The paper proposes scalable "long late chunking" for huge documents and introduces span pooling fine-tuning for further improvements.
 
 ##### Key Contributions
 1. Paradigm shift from pre-embedding chunking to post-embedding chunking preserving cross-chunk contextual dependencies
-2. Model-agnostic approach requiring no additional training for core benefits with demonstrated retrieval improvements
-3. Scalable solution (long late chunking) for very large documents exceeding model context windows
+2. Model-agnostic approach requires no additional training for core benefits with demonstrated retrieval improvements
+3. Scalable solution (long late chunking) for huge documents exceeding model context windows
 4. Computationally more efficient than LLM-based contextual augmentation alternatives with immediate practical applicability
 
 #### Imperceptible Jailbreaking against Large Language Models
