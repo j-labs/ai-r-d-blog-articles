@@ -23,12 +23,14 @@ This paper presents Miras, a framework that abstracts modern sequence models (Tr
 
 #### Titans: Learning to Memorize at Test Time
 
-Titans introduces a family of architectures featuring a novel neural long-term memory module that learns to memorize at test time using gradient-based updates with momentum and weight decay. The architecture treats surprising events as more memorable and proposes three variants: Memory as Context (MAC), Memory as Gate (MAG), and Memory as Layer (MAL). These combine neural memory for long-term context with attention for short-term dependencies and persistent memory for task knowledge, addressing the quadratic complexity of Transformers and poor compression of linear recurrent models.
+Titans introduces a family of architectures featuring a novel neural long-term memory module that learns to memorize at test time using gradient-based updates with momentum and weight decay. The architecture treats surprising events as more memorable and proposes three variants: Memory as Context (MAC)*, Memory as Gate (MAG), and Memory as Layer (MAL). These combine neural memory for long-term context with attention for short-term dependencies and persistent memory for task knowledge, addressing the quadratic complexity of Transformers and poor compression of linear recurrent models.
+
+*Note: MAC variant achieves the best overall performance compared to other variants, but is computationally havier.
 
 ##### Key Contributions
 1. Novel test-time learning memory module with momentum-based updates and adaptive forgetting mechanisms
-2. Three architectural variants (MAC, MAG, MAL) that flexibly integrate memory with existing components
-3. Effective scaling to 2M+ context windows with competitive results against models 70× larger
+2. Three architectural variants (MAC, MAG, MAL) that integrate long-term memory with attention via different mechanisms
+3. Effective scaling to 2M+ context windows with competitive results against competing architectures
 
 #### Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues
 
