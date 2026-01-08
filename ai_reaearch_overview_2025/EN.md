@@ -115,7 +115,9 @@ This group demonstrates the maturation of foundation models beyond text, establi
 
 #### SAM Audio: Segment Anything in Audio
 
-SAM Audio is a foundation model for general audio separation that unifies text, visual, and temporal span prompting within a single diffusion transformer architecture. Built on flow matching and trained on large-scale audio data spanning speech, music and general sounds, it achieves state-of-the-art performance across diverse benchmarks. The paper introduces span prompting as a novel temporal conditioning mechanism and releases SAM Audio-Bench (comprehensive multimodal separation benchmark with human-labeled prompts) and SAM Audio Judge (reference-free evaluation model strongly correlated with human judgment).
+SAM Audio is a foundation model for general audio separation that unifies text, visual, and temporal span prompting within a single diffusion transformer architecture. Built on flow matching* and trained on large-scale audio data spanning speech, music and general sounds, it achieves state-of-the-art performance across diverse benchmarks. The paper introduces span prompting as a novel temporal conditioning mechanism and releases SAM Audio-Bench (comprehensive multimodal separation benchmark with human-labeled prompts) and SAM Audio Judge (reference-free evaluation model strongly correlated with human judgment).
+
+*Note: Flow matching uses the same architecture as diffussion, but with a different objective – instead of optimizing stepwise denoising it optimizes the shortest trajectory from noise to data.
 
 ##### Key Contributions
 1. First foundation model achieving SOTA across multiple audio domains (speech, music, general sounds) with unified multimodal prompting
@@ -123,7 +125,7 @@ SAM Audio is a foundation model for general audio separation that unifies text, 
 
 #### Perception Encoder: The best visual embeddings are not at the output of the network
 
-Perception Encoder introduces a state-of-the-art vision encoder family discovering that strong general features for diverse downstream tasks exist in intermediate layers of contrastively-trained models, not the output layer. The work develops PEcore (robust image pretraining with progressive resolution, LAMB optimizer, RoPE, attention pooling, mask regularization, plus video data engine with 22M synthetic captions), PElang (language-aligned variant achieving 94.6 DocVQA with 8B LLM), and PEspatial (spatially-aligned variant using self-distillation and SAM 2.1 mask logits, setting COCO detection SOTA of 66.0 box mAP).
+Perception Encoder introduces a state-of-the-art vision encoder family discovering that strong general features for diverse downstream tasks exist in intermediate layers of contrastively-trained models, not the output layer. The work develops PEcore (robust image pretraining), PElang (language-aligned variant), and PEspatial (spatially-aligned variant ).
 
 ##### Key Contributions
 1. Paradigm-shifting insight that optimal features for diverse tasks reside in intermediate layers, not model outputs
@@ -133,13 +135,15 @@ Perception Encoder introduces a state-of-the-art vision encoder family discoveri
 
 #### One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation
 
-This paper introduces FAE (Feature Auto-Encoder), a minimalist framework adapting pretrained self-supervised visual representations (DINOv2, SigLIP) into low-dimensional latents for generative models. The key innovation is using a single self-attention layer to compress high-dimensional embeddings, followed by a double-decoder architecture separating feature reconstruction from image synthesis. This approach overcomes incompatibility between understanding-oriented feature spaces and generation-friendly latents without complex objectives or substantial architectural changes.
+This paper introduces FAE (Feature Auto-Encoder), a minimalist framework adapting pretrained self-supervised visual representations (DINOv2, SigLIP)* into low-dimensional latents for generative models. The key innovation is using a single self-attention layer to compress high-dimensional embeddings, followed by a double-decoder architecture separating feature reconstruction from image synthesis. This approach overcomes incompatibility between understanding-oriented feature spaces and generation-friendly latents without complex objectives or substantial architectural changes.
+
+*Note: Those are two different model families, DINOv2 being a self-supervised vision encoder, while SigLIP is from the CLIP (contrastive learning) family.
 
 ##### Key Contributions
 1. Minimal single-layer compression architecture bridging understanding and generation with preserved semantic quality
 2. Double-decoder design enabling effective separation of feature reconstruction and image synthesis objectives
 3. State-of-the-art or near-SOTA performance with significantly faster convergence than previous models
-4. Universal compatibility with various backbone encoders and generative model families (diffusion, normalizing flows)
+4. Universal compatibility with various backbone encoders and generative model families
 
 ---
 
