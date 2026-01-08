@@ -17,9 +17,9 @@ This paper presents Miras, a framework that abstracts modern sequence models (Tr
 ##### Key Contributions
 1. Theoretical unification of sequence modeling architectures through the lens of associative memory and online optimization
 2. Four-component design framework (memory architecture, attentional bias, retention mechanism, learning algorithm) enabling systematic architecture exploration
-3. Three novel architectures (Moneta, Yaad, Memora*) with alternative objectives that outperform existing baselines
+3. Three novel architectures (Moneta, Yaad, Memora**) with alternative objectives that outperform existing baselines
 
-*Note: Memora performs the worst in explored parameter ranges, but has the strongest stability guarantees, so potentially might be easier to train at scale.
+**Note: Memora performs the worst in explored parameter ranges, but has the strongest stability guarantees, so potentially might be easier to train at scale.
 
 #### Titans: Learning to Memorize at Test Time
 
@@ -34,7 +34,10 @@ Titans introduces a family of architectures featuring a novel neural long-term m
 
 #### Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues
 
-This paper identifies and resolves a fundamental limitation in modern Linear Recurrent Neural Networks (LRNNs) like Mamba and DeltaNet: their inability to perform state-tracking tasks due to eigenvalue restrictions. The authors prove that LRNNs with eigenvalues restricted to [0, 1] cannot solve tasks like parity and modular counting in finite precision, and that non-triangular matrices are needed for general modular counting. Critically, they demonstrate that expanding the eigenvalue range to [−1, 1] dramatically enhances expressive power, enabling LRNNs to solve all regular languages through products of generalized Householder matrices.
+This paper identifies and resolves a fundamental limitation in modern Linear Recurrent Neural Networks (LRNNs) like Mamba and DeltaNet: their inability to perform state-tracking tasks due to eigenvalue restrictions. The authors prove that LRNNs with eigenvalues restricted to [0, 1] cannot solve tasks like parity and modular counting in finite precision, and that non-triangular matrices are needed for general modular counting. Critically, they demonstrate that expanding the eigenvalue range to [−1, 1] dramatically enhances expressive power, enabling LRNNs to solve all regular languages* through products of generalized Householder matrices**.
+
+*Note: Regular languages are a class of formal languages that can be recognized by finite state automata.
+**Note: this generalization allows rotation in addtition to vector reflection.
 
 ##### Key Contributions
 1. Theoretical proof of fundamental expressivity limitations in positive-eigenvalue-only LRNNs for state-tracking tasks
@@ -53,7 +56,10 @@ As language models scale to billions of parameters and multi-million token conte
 
 #### DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention
 
-DeepSeek-V3.2-Exp introduces DeepSeek Sparse Attention (DSA), which uses a lightning indexer and fine-grained token selection to implement efficient sparse attention. The model is created through continued training of DeepSeek-V3.1-Terminus, following a pipeline of continual pre-training (dense warm-up, sparse adaptation) and two stage post-training. Proposed attention architecture significantly reduces computation costs (each query token attends to a small, fixed subset of keys), especially for very long contexts, while maintaining comparable performance across general, code, math and agentic search tasks.
+DeepSeek-V3.2-Exp introduces DeepSeek Sparse Attention (DSA), which uses a lightning indexer and fine-grained token selection* to implement efficient sparse attention. The model is created through continued training of DeepSeek-V3.1-Terminus, following a pipeline of continual pre-training (dense warm-up**, sparse adaptation) and two stage post-training. Proposed attention architecture significantly reduces computation costs (each query token attends to a small, fixed subset of keys), especially for very long contexts, while maintaining comparable performance across general, code, math and agentic search tasks.
+
+*Note: indexer essentially computes a weighted dot product score between fp8 projections of queries and keys, while selector retrieves top-k from it.
+**Note: warm-up is used to initialize indexer weights.
 
 ##### Key Contributions
 1. Novel DSA mechanism with lightning indexer for efficient sparse attention computation
@@ -69,16 +75,21 @@ This work systematically investigates integrating gating mechanisms into attenti
 ##### Key Contributions
 1. Comprehensive empirical analysis of gating mechanisms in attention across two parameters scales, multiple compute levels and architectures
 2. Identification of two complementary improvement mechanisms: non-linearity and input-dependent sparsity
-3. Elimination of attention sink, enabling better long-context generalization (thanks to savings in precision of attention scores previously wasted on sink)
+3. Elimination of attention sink, enabling better long-context generalization**
+
+**Note: thanks to savings in precision of attention scores previously wasted on massive sink score.
 
 #### REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding
 
-REFUSION introduces a novel LLM framework combining masked diffusion model (MDM) parallelism with slot-level autoregressive infilling. The architecture partitions sequences into fixed-length slots and employs a two-stage "plan-and-infill" decoding: diffusion-based global planning identifies weakly dependent slots for parallel processing, then autoregressive infilling generates tokens within each slot sequentially. This enables full reuse of key-value caches while avoiding token-level incoherence, trained with a hybrid objective optimizing both global planning and local infilling.
+REFUSION introduces a novel LLM framework combining masked diffusion model (MDM) parallelism with slot-level autoregressive infilling*. The architecture partitions sequences into fixed-length slots and employs a two-stage "plan-and-infill" decoding: diffusion-based global planning identifies weakly dependent slots for parallel processing**, then autoregressive infilling generates tokens within each slot sequentially. This enables full reuse of key-value caches while avoiding token-level incoherence, trained with a hybrid objective optimizing both global planning and local infilling.
+
+*Note: in simpler words: it is a hybrid approach that marries autoregressive LLMs with diffusion models.
+**Note: empirically grounded heuristic here is that weakly dependent slots have low confidence score (globally), thus can potentially "ignore" each other during decoding.
 
 ##### Key Contributions
 1. Novel hybrid architecture bridging parallel diffusion generation with autoregressive coherence
 2. Two-stage plan-and-infill decoding algorithm enabling efficient parallelization without quality loss
-3. Full KV cache reusability increasing efficiency by 2.33× over autoregressive baselines
+3. Full KV cache reusability increasing efficiency by 2.33× over a purely autoregressive baseline
 
 #### SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity
 
