@@ -126,29 +126,29 @@ SAM Audio jest modelem podstawowym dla generycznej separacji ścieżek audio, kt
 
 #### Perception Encoder: The best visual embeddings are not at the output of the network
 
-Perception Encoder wprowadza state-of-the-art rodzinę enkoderów wizualnych odkrywając, że silne ogólne cechy dla różnorodnych zadań downstream istnieją w warstwach pośrednich modeli trenowanych kontrastowo, nie w warstwie wyjściowej. Praca rozwija PEcore (robust image pretraining), PElang (wariant wyrównany językowo) i PEspatial (wariant wyrównany przestrzennie).
+Perception Encoder wprowadza, najlepszą w swojej klasie, rodzinę enkoderów wizualnych odkrywając, że silne ogólne ficzery dla różnorodnych zadań downstream istnieją w warstwach pośrednich modeli trenowanych kontrastowo, a nie w warstwie wyjściowej. Praca rozwija PEcore (solidny, wizualny pretraining), PElang (wariant dostosowany językowo) i PEspatial (wariant dostosowany przestrzennie).
 
 ##### Kluczowe kontrybucje
-1. Zmieniające paradygmat spostrzeżenie, że optymalne cechy dla różnorodnych zadań znajdują się w warstwach pośrednich, nie wyjściach modelu
-2. Kompleksowe przepisy pretreningu (PEcore) przewyższające modele trenowane na proprietary datasets (JFT-3B/WebLI)
-3. Strategie wyrównywania specyficzne dla zadań (językowe i przestrzenne) osiągające SOTA w detekcji, VQA i rozumieniu wideo
-4. Wydanie modelu 2B parametrów, kodu i PE Video Dataset (1M filmów, 120K adnotacji udoskonalonych przez ludzi)
+1. Zmieniające paradygmat spostrzeżenie, że optymalne ficzery dla różnorodnych zadań znajdują się w warstwach pośrednich, a nie wyjściach modelu
+2. Kompleksowe instrukcje dla pretreningu (PEcore) przewyższające modele trenowane na prywatnych zbiorach danych (JFT-3B/WebLI)
+3. Strategie dostosowania specyficzne dla zadań (językowe i przestrzenne) osiągające SOTA w detekcji, VQA i rozumieniu wideo
+4. Wydanie modelu o 2B parametrów, kodu i PE Video Dataset (1M filmów, 120K adnotacji udoskonalonych przez ludzi)
 
 #### One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation
 
-Ta praca wprowadza FAE (Feature Auto-Encoder), minimalistyczny framework adaptujący wytrenowane self-supervised reprezentacje wizualne (DINOv2, SigLIP)* do latentów o niskiej wymiarowości dla modeli generatywnych. Kluczową innowacją jest użycie pojedynczej warstwy self-attention do kompresji embeddingów o wysokiej wymiarowości, po której następuje architektura double-decoder oddzielająca rekonstrukcję cech od syntezy obrazu. To podejście przezwycięża niekompatybilność między przestrzeniami cech zorientowanymi na rozumienie a latentami przyjaznymi dla generowania bez złożonych celów lub znaczących zmian architektonicznych.
+Ta praca wprowadza FAE (Feature Auto-Encoder), minimalistyczny framework adaptujący wytrenowane self-supervised reprezentacje wizualne (DINOv2, SigLIP)* do low-dimensional latents dla modeli generatywnych. Kluczową innowacją jest użycie pojedynczej warstwy self-attention do kompresji embeddingów o wysokiej wymiarowości, po której następuje architektura double-decoder oddzielająca rekonstrukcję ficzerów od syntezy obrazu. To podejście przezwycięża niekompatybilność między przestrzeniami ficzerów zorientowanymi na rozumienie a ficzerami przyjaznymi dla generowania bez złożonych funkcji straty lub znaczących zmian architektonicznych.
 
-*Uwaga: To dwie różne rodziny modeli, DINOv2 będący self-supervised enkoderym wizji, podczas gdy SigLIP jest z rodziny CLIP (contrastive learning).
+*Uwaga: To dwie różne rodziny modeli, DINOv2 będący self-supervised enkoderem wizji, podczas gdy SigLIP pochodzi z rodziny modeli CLIP (contrastive learning).
 
 ##### Kluczowe kontrybucje
-1. Minimalna jednowarstwowa architektura kompresji mostkująca rozumienie i generowanie z zachowaną jakością semantyczną
-2. Projekt double-decoder umożliwiający efektywne rozdzielenie celów rekonstrukcji cech i syntezy obrazu
-3. State-of-the-art lub prawie SOTA wydajność ze znacznie szybszą konwergencją niż wcześniejsze modele
-4. Uniwersalna kompatybilność z różnymi enkoderami backbone i rodzinami modeli generatywnych
+1. Minimalna jednowarstwowa architektura kompresji łącząca rozumienie i generowanie z zachowaną jakością semantyczną
+2. Architektura double-decoder umożliwiająca efektywne rozdzielenie celów rekonstrukcji ficzerów i syntezy obrazu
+3. SOTA lub prawie-SOTA wydajność ze znacznie szybszą konwergencją niż wcześniejsze modele
+4. Uniwersalna kompatybilność z różnymi bazowymi enkoderami i rodzinami modeli generatywnych
 
 ---
 
-## Reasoning i Systemy Agentyczne
+## Reasoning i systemy agentyczne
 
 ### Wysokopoziomowe podsumowanie sekcji
 
