@@ -178,19 +178,19 @@ Ta publikacja wprowadza Tiny Recursive Model (TRM), uproszczoną architekturę r
 
 #### LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics
 
-LeJEPA wprowadza teoretycznie zasadniczy framework dla self-supervised learning w ramach paradygmatu Joint-Embedding Predictive Architecture. Kluczowym spostrzeżeniem jest to, że izotropowe embeddingi Gaussowskie* jednoznacznie minimalizują ryzyko predykcji downstream w szerokich rodzinach zadań. LeJEPA łączy stratę predykcyjną z Sketched Isotropic Gaussian Regularization (SIGReg), która udowodnialnie wymusza izotropowość Gaussowską używając skalowalnych, lekkich w hiperparametrach, różniczkowalnych metod opartych na projekcji, eliminując kruche heurystyki jak stop-gradient i modele teacher-student.
+LeJEPA wprowadza teoretycznie zasadniczy framework dla self-supervised learning w ramach paradygmatu Joint-Embedding Predictive Architecture. Kluczowym spostrzeżeniem jest to, że izotropowe embeddingi Gaussowskie* wyjątkowo dobrze minimalizują ryzyko predykcji w szerokich rodzinach zadań downstream. LeJEPA łączy stratę predykcyjną z Sketched Isotropic Gaussian Regularization (SIGReg), która (jak udowodniono) wymusza izotropowość Gaussowską używając skalowalnych, lekkich w hiperparametrach, różniczkowalnych metod opartych na projekcji, eliminując kruche heurystyki jak stop-gradient i modele teacher-student.
 
 *Uwaga: Izotropowe embeddingi Gaussowskie mają tę samą wariancję we wszystkich wymiarach, zapewniając optymalną eksploatację pojemności informacyjnej każdego wymiaru.
 
 ##### Kluczowe kontrybucje
-1. Matematyczny dowód, że izotropowe embeddingi Gaussowskie minimalizują ryzyko downstream w rodzinach zadań
+1. Matematyczny dowód, że izotropowe embeddingi Gaussowskie minimalizują ryzyko downstream
 2. SIGReg: skalowalny, różniczkowalny regularyzator wymuszający izotropowość Gaussowską z pojedynczym hiperparametrem i liniową złożonością
-3. Walidacja na 60+ architekturach i 10 datasetach pokazująca SOTA lub lepszą wydajność z wyjątkową stabilnością
-4. Demonstracja, że in-domain SSL może przewyższać transfer z masywnych modeli podstawowych, kwestionując dominujące założenia
+3. Walidacja na 60+ architekturach i 10 zbiorach danych pokazująca SOTA lub lepszą wydajność z wyjątkową stabilnością
+4. Demonstracja, że domenowe SSL może przewyższać transfer z masywnych modeli podstawowych, kwestionując dominujące założenia
 
 ---
 
-## Systemy Retrieval i Ranking
+## Systemy retrieval i rankingowe
 
 ### Wysokopoziomowe podsumowanie sekcji
 
