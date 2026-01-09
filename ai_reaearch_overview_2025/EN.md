@@ -164,7 +164,7 @@ ToolOrchestra introduces a methodology for training small language models to ser
 1. Paradigm shift from single-model to orchestrated multi-tool/multi-model systems for reasoning
 2. End-to-end RL training with multi-objective rewards (correctness, efficiency, user alignment)
 3. Dramatic efficiency gains: 8B orchestrator outperforms substantially larger models at fraction of compute cost
-4. Strong generalization to unseen tools, tasks and user preferences with ToolScale benchmark release
+4. Strong generalization to unseen tools, tasks and user preferences tested with ToolScale benchmark
 
 #### Less is More: Recursive Reasoning with Tiny Networks
 

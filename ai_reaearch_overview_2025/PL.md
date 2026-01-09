@@ -152,29 +152,29 @@ Ta praca wprowadza FAE (Feature Auto-Encoder), minimalistyczny framework adaptuj
 
 ### Wysokopoziomowe podsumowanie sekcji
 
-Ta grupa reprezentuje fundamentalne przemyślenie tego, jak systemy AI podchodzą do złożonego rozumowania i rozwiązywania problemów. Zamiast polegać wyłącznie na skali, te prace demonstrują, że wybory architektoniczne, strategie orkiestracji i cele treningu mogą odblokować dramatycznie poprawione możliwości rozumowania. ToolOrchestra pokazuje, że małe modele mogą koordynować większe i narzędzia bardziej efektywnie niż monolityczne giganty, osiągając lepsze wyniki za ułamek kosztu. "Less is More" dowodzi, że małe sieci rekurencyjne mogą przewyższać duże modele językowe w trudnych łamigłówkach poprzez głębokie iteracyjne rozumowanie. LeJEPA dostarcza teoretyczne ugruntowanie dla uczenia self-supervised, które usuwa kruche heurystyki, jednocześnie poprawiając odporność. Te postępy wspólnie sugerują przyszłość, w której możliwości modelowania pochodzą nie tylko z rozmiaru modelu, ale z zasadniczego projektu architektonicznego, efektywnej orkiestracji zasobów i matematycznie solidnych procedur treningu.
+Ta grupa reprezentuje fundamentalne przeformułowanie tego, jak systemy AI podchodzą do złożonego rozumowania i rozwiązywania problemów. Zamiast polegać wyłącznie na skali, te publikacje demonstrują, że wybory architektoniczne, strategie orkiestracji i cele treningu mogą umożliwić istotne poprawienie możliwości rozumowania. ToolOrchestra pokazuje, że małe modele mogą koordynować większe modele i narzędzia bardziej efektywnie niż monolityczne giganty, osiągając lepsze wyniki za ułamek kosztu. "Less is More" dowodzi, że małe sieci rekurencyjne mogą przewyższać duże modele językowe w trudnych łamigłówkach poprzez głębokie, iteracyjne rozumowanie. LeJEPA dostarcza teoretyczne ugruntowanie dla self-supervised learning, które usuwa kruche heurystyki, jednocześnie poprawiając solidność modeli. Te postępy wspólnie nakreślają przyszłość, w której możliwości modelowania pochodzą nie tylko z rozmiaru modelu, ale z zasadniczego projektu architektonicznego, efektywnej orkiestracji zasobów i matematycznie dopracowanych procedur treningu.
 
 ### Publikacje
 
 #### ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration
 
-ToolOrchestra wprowadza metodologię treningu małych modeli językowych do służenia jako agenci orkiestracji zarządzający zarówno tradycyjnymi narzędziami (wyszukiwanie web, interpretery kodu), jak i różnorodnymi domenowo-wyspecjalizowanymi i ogólnego przeznaczenia LLM jako narzędziami zewnętrznymi. Model Orchestrator-8B jest trenowany end-to-end poprzez reinforcement learning, kierowany przez poprawność wyników, efektywność (koszt i opóźnienie) oraz wyrównanie preferencji użytkownika. Podejście obejmuje ToolScale, duży syntetyczny benchmark dla wieloetapowych zadań agenta użycia narzędzi, osiągając lepszą wydajność i efektywność kosztową względem monolitycznych LLM, w tym GPT-5.
+ToolOrchestra wprowadza metodologię treningu małych modeli językowych do pełnienia funkcji agentów orkiestracji zarządzających zarówno tradycyjnymi narzędziami (wyszukiwanie w sieci, interpretery kodu), jak i różnorodnymi modelami językowymi jako narzędziami zewnętrznymi. Model Orchestrator-8B jest trenowany end-to-end poprzez reinforcement learning, kierowany przez poprawność wyników, efektywność (koszt i opóźnienie) oraz dopasowanie do preferencji użytkownika. Podejście obejmuje użycie ToolScale - dużego, syntetycznego benchmarku dla wieloetapowych zadań agenta narzędziowego, osiągając lepszą wydajność i efektywność kosztową względem monolitycznych LLM, w tym GPT-5.
 
 ##### Kluczowe kontrybucje
 1. Zmiana paradygmatu z pojedynczego modelu do zorkiestrowanych systemów multi-tool/multi-model dla rozumowania
-2. End-to-end trening RL z wielocelowymi nagrodami (poprawność, efektywność, wyrównanie użytkownika)
-3. Dramatyczne zyski efektywności: orkiestrator 8B przewyższa znacznie większe modele za ułamek kosztu obliczeń
-4. Silna generalizacja do niewidzianych narzędzi, zadań i preferencji użytkowników z wydaniem benchmarku ToolScale
+2. End-to-end trening RL ze zróżnicowanymi nagrodami (poprawność, efektywność, dopasowanie do użytkownika)
+3. Ogromne zyski efektywności: Orchestrator-8B przewyższa znacznie większe modele za ułamek kosztu obliczeń
+4. Doskonała generalizacja do nieznanych narzędzi, zadań i preferencji użytkowników, testowana z użyciem benchmarku ToolScale
 
 #### Less is More: Recursive Reasoning with Tiny Networks
 
-Ta praca wprowadza Tiny Recursive Model (TRM), uproszczoną architekturę rozumowania rekurencyjnego używającą pojedynczej małej (2-warstwowej, 7M parametrów) sieci neuronowej, która przewyższa zarówno Hierarchical Reasoning Model (HRM), jak i duże modele językowe w trudnych zadaniach jak Sudoku, Maze i ARC-AGI z minimalną ilością danych treningowych (~1,000 przykładów). W przeciwieństwie do złożonej dualnej hierarchii sieciowej HRM, TRM używa eleganckiego projektu pojedynczej sieci naprzemiennie między aktualizacjami stanu latentnego a udoskonalaniem rozwiązania z głęboką superwizją i prostymi kryteriami zatrzymania.
+Ta publikacja wprowadza Tiny Recursive Model (TRM), uproszczoną architekturę rozumowania rekurencyjnego używającą pojedynczej, małej (2-warstwowej, 7M parametrów) sieci neuronowej, która przewyższa zarówno Hierarchical Reasoning Model (HRM), jak i duże modele językowe w trudnych zadaniach jak Sudoku, Maze i ARC-AGI z minimalną ilością danych treningowych (~1,000 przykładów). W przeciwieństwie do złożonej, dualnej hierarchii sieciowej HRM, TRM używa eleganckiego projektu pojedynczej sieci, która przełącza się między aktualizacjami stanu ukrytego a udoskonalaniem rozwiązania z głęboką superwizją i prostymi kryteriami stopu.
 
 ##### Kluczowe kontrybucje
 1. State-of-the-art wyniki w ekstremalnych benchmarkach rozumowania (87% Sudoku, 45% ARC-AGI-1) z 7M parametrów
-2. Dramatyczne uproszczenie rozumowania rekurencyjnego: pojedyncza sieć vs. dualna hierarchia sieciowa
-3. Dowód, że głęboka rekurencja z małymi sieciami unika overfitting i maksymalizuje generalizację w reżimach małych próbek
-4. Wyzwanie dla paradygmatu zorientowanego na skalę: projekt architektoniczny ponad liczbę parametrów dla strukturalnego rozumowania
+2. Ogromne uproszczenie rozumowania rekurencyjnego: pojedyncza sieć vs. dualna hierarchia sieciowa
+3. Dowód, że głęboka rekurencja z małymi sieciami unika nadmiernego dopasowania i maksymalizuje generalizację w reżimach małych ilości danych
+4. Wyzwanie dla paradygmatu zorientowanego na skalę: projekt architektoniczny ważniejszy niż liczba parametrów dla strukturalnego rozumowania
 
 #### LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics
 
