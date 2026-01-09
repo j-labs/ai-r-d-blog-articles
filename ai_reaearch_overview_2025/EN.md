@@ -225,10 +225,10 @@ Late Chunking introduces a novel approach to the generation of text chunk embedd
 
 #### Imperceptible Jailbreaking against Large Language Models
 
-This paper introduces imperceptible jailbreaks exploiting invisible Unicode variation selectors to append adversarial suffixes to prompts. The attacks create invisible changes that alter tokenizer input while remaining invisible to human readers, effectively bypassing safety alignment of state-of-the-art LLMs. A chain-of-search optimization pipeline efficiently generates and transfers successful invisible suffixes across prompts and models, validated on four popular open-source LLMs with high success rates in harmful output generation and prompt injection.
+This paper introduces imperceptible jailbreaks exploiting invisible Unicode variation selectors to append adversarial suffixes to prompts. The attacks create invisible changes that alter tokenizer input while remaining invisible to human readers, effectively bypassing safety alignment of various open-source LLMs. A chain-of-search optimization pipeline efficiently generates successful invisible suffixes across prompts and models with high success rates in harmful output generation and prompt injection.
 
 ##### Key Contributions
-1. Discovery of new vulnerability class based on invisible Unicode characters bypassing current safety mechanisms
+1. Discovery of a new vulnerability class based on invisible Unicode characters bypassing current safety mechanisms
 2. Demonstration of attack transferability across multiple LLM architectures (Vicuna, Llama-2, Llama-3, Mistral)
-3. Chain-of-search optimization enabling efficient generation of transferable adversarial suffixes
-4. Critical revelation of tokenizer-level vulnerabilities requiring revision of input filtering and safety alignment strategies industry-wide
+3. Chain-of-search optimization enabling efficient generation of adversarial suffixes
+4. Critical revelation of tokenizer-level vulnerabilities requiring revision of input filtering and safety alignment strategies
