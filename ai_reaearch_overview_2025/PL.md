@@ -110,7 +110,7 @@ SparseLoRA przyspiesza fine-tuning LLM wykorzystując contextual sparsity, dynam
 
 ### Wysokopoziomowe podsumowanie sekcji
 
-Ta grupa demonstruje dojrzałość modeli podstawowych poza tekstem, ustanawiając nowe paradygmaty dla rozumienia wizualnego i audio. Te prace dzielą wspólny temat: przemyślenie gdzie i jak ekstrahować lub konstruować reprezentacje dla maksymalnej efektywności w różnorodnych zadaniach downstream. SAM Audio osiąga bezprecedensową unifikację w domenach audio poprzez multimodalne promptowanie. Perception Encoder kwestionuje założenie, że warstwy wyjściowe zawierają najlepsze ficzery, a "One Layer Is Enough" pokazuje, że minimalne warstwy adaptacji mogą adaptować potężne pre-trenowane enkodery do zadań generatywnych. Wspólnie reprezentują przesunięcie w kierunku bardziej efektywnych, wszechstronnych i teoretycznie ugruntowanych podejść do multimodalnego AI, z praktycznymi implikacjami dla systemów produkcyjnych obejmujących edycję audio, computer vision, detekcję, rozumienie wideo i aplikacje generatywne.
+Ta grupa demonstruje dojrzałość modeli podstawowych innych niż tekstowe, ustanawiając nowe paradygmaty dla rozumienia wizualnego i audio. Te prace dzielą wspólny temat: przemyślenie gdzie i jak ekstrahować lub konstruować reprezentacje dla maksymalnej efektywności w różnorodnych zadaniach downstream. SAM Audio osiąga bezprecedensową unifikację w domenach audio poprzez multimodalne promptowanie. Perception Encoder kwestionuje założenie, że warstwy wyjściowe zawierają najlepsze ficzery, a "One Layer Is Enough" pokazuje, że minimalne warstwy adaptacji mogą dostosować potężne pre-trenowane enkodery do zadań generatywnych. Wspólnie reprezentują dążenie w kierunku bardziej efektywnych, wszechstronnych i teoretycznie ugruntowanych podejść do multimodalnego AI, z praktycznymi implikacjami dla systemów produkcyjnych obejmujących edycję audio, computer vision, detekcję, rozumienie wideo i aplikacje generatywne.
 
 ### Publikacje
 
@@ -194,41 +194,43 @@ LeJEPA wprowadza teoretycznie zasadniczy framework dla self-supervised learning 
 
 ### Wysokopoziomowe podsumowanie sekcji
 
-Ta grupa rozwiązuje praktyczne wyzwania wdrażania systemów AI na skalę przemysłową, gdzie efektywność, relevantność i odporność są niezbędne. Te prace mostują lukę między postępami badawczymi a systemami produkcyjnymi, demonstrują, jak techniki z modeli językowych (context engineering, reasoning) mogą transformować zadania dyskryminatywne jak wyszukiwanie i rekomendacje. OnePiece przenosi rozumowanie w stylu LLM do rankingu e-commerce z wymiernym wpływem biznesowym, podczas gdy Late Chunking rozwiązuje fundamentalny problem w systemach retrieval poprzez zachowanie kontekstu na poziomie dokumentu. Włączenie Imperceptible Jailbreaking służy jako krytyczne przypomnienie, że w miarę jak te systemy stają się bardziej zdolne i szeroko wdrażane, zrozumienie ich podatności staje się niezbędne dla bezpiecznego wdrożenia produkcyjnego. Wspólnie te prace reprezentują dojrzałość AI od prototypów badawczych do odpornych, skalowalnych systemów obsługujących miliardy użytkowników.
+Ta grupa rozwiązuje praktyczne wyzwania wdrażania systemów AI na skalę przemysłową, gdzie efektywność, dopasowanie i odporność są niezbędne. Te prace niwelują lukę między postępami badawczymi a systemami produkcyjnymi oraz demonstrują, jak techniki z modeli językowych (context engineering, reasoning) mogą transformować zadania dyskryminatywne, jak wyszukiwanie i rekomendacje. OnePiece przenosi rozumowanie w stylu LLM do rankingu e-commerce z wymiernym wpływem na wyniki biznesowe, podczas gdy Late Chunking rozwiązuje fundamentalny problem w systemach retrieval poprzez zachowanie kontekstu na poziomie całego dokumentu. Włączenie Imperceptible Jailbreaking służy jako krytyczne przypomnienie, że w miarę jak te systemy stają się lepsze i szerzej wdrażane, zrozumienie ich podatności staje się niezbędne dla bezpiecznego wdrożenia produkcyjnego. Wspólnie te prace reprezentują dojrzałość AI od prototypów badawczych do odpornych, skalowalnych systemów obsługujących miliardy użytkowników.
 
 ### Publikacje
 
 #### OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System
 
-OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy rankingowe poprzez integrację context engineering i rozumowania w stylu LLM. System wzbogaca reprezentacje wejściowe poprzez strukturalny context engineering (historia użytkownika, kotwice preferencji z wiedzy eksperckiej, deskryptory sytuacyjne, zestawy itemów kandydujących), implementuje block-wise latent reasoning dla wieloetapowego rozumowania skalowalnego pod względem bandwidth* i przyjmuje progresywny trening multi-task** używając naturalnych sygnałów feedbacku (kliknięcie, dodaj-do-koszyka, zakup) jako superwizji dla etapów rozumowania.
+OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy rankingowe poprzez integrację context engineering i rozumowania w stylu LLM. System wzbogaca reprezentacje wejściowe poprzez strukturalny context engineering (historia użytkownika, kotwice preferencji z wiedzy eksperckiej, deskryptory sytuacyjne, zestawy przedmiotów kandydujących), implementuje block-wise latent reasoning dla wieloetapowego rozumowania skalowalnego pod względem przepustowości* i przyjmuje progresywny trening multi-task** używając naturalnych sygnałów feedbacku (kliknięcie, dodaj-do-koszyka, zakup) jako superwizji dla etapów rozumowania.
 
 *Uwaga: Szerszy kanał informacyjny między krokami rozumowania poprzez użycie wielu tokenów zamiast 1 jak wcześniej proponowano.
-**Uwaga: Progresywność zapobiega konkurującym gradientom z wielu sygnałów feedbacku.
+**Uwaga: Progresywność zapobiega konkurowaniu gradientów z wielu sygnałów feedbacku.
 
 ##### Kluczowe kontrybucje
 1. Systematyczna adaptacja mechanizmów paradygmatu LLM (context engineering, wieloetapowe rozumowanie) do dyskryminatywnego rankingu przemysłowego
-2. Architektura block-wise latent reasoning umożliwiająca skalowalne wieloetapowe rozumowanie nad bogatymi reprezentacjami wejściowymi
-3. Wdrożenie produkcyjne na skalę Shopee pokazujące wyższe przychody reklamowe i wartość towarów użytkownika z poprawioną efektywnością
-4. Lepsza efektywność parametrów/danych i wykorzystanie sprzętu w porównaniu do wysoce zoptymalizowanych ugruntowanych baseline'ów (DLRM, HSTU)***
+2. Architektura block-wise latent reasoning umożliwiająca skalowalne, wieloetapowe rozumowanie nad bogatymi reprezentacjami wejściowymi
+3. Wdrożenie produkcyjne na skalę Shopee pokazujące wyższe przychody reklamowe i wartość towarów użytkownika wraz z poprawioną efektywnością
+4. Lepsza efektywność parametrów/danych i wykorzystanie sprzętu w porównaniu do wysoce zoptymalizowanych i ugruntowanych baseline'ów (DLRM, HSTU)***
 
 ***Uwaga: DLRM to produkcyjny baseline model rekomendacji Shopee, podczas gdy HSTU to state-of-the-art framework rekomendacji od Meta.
 
 #### Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
 
-Late Chunking wprowadza nowe podejście do generowania embeddingów chunków tekstu, które zachowuje szersze informacje kontekstowe poprzez przetwarzanie całych dokumentów z modelami embeddingowymi długiego kontekstu, aby wytworzyć embeddingi na poziomie tokenów, następnie dzieląc je na chunki. W przeciwieństwie do tradycyjnego chunkowania, które dzieli dokumenty przed embeddingiem, to zapewnia, że każda reprezentacja chunku korzysta z pełnego kontekstu dokumentu. Praca proponuje skalowalne "long late chunking" dla ogromnych dokumentów i wprowadza span pooling fine-tuning dla dalszych ulepszeń.
+Late Chunking wprowadza nowe podejście do generowania embeddingów chunków tekstu, które zachowuje szersze informacje kontekstowe poprzez przetwarzanie całych dokumentów z modelami embeddingowymi o długim kontekście, aby wytworzyć embeddingi na poziomie tokenów, następnie dzieląc je na chunki. W przeciwieństwie do tradycyjnego chunkowania, które dzieli dokumenty przed embeddingiem, to zapewnia, że każda reprezentacja chunku korzysta z pełnego kontekstu dokumentu. Praca proponuje skalowalne "long late chunking" dla ogromnych dokumentów i wprowadza span pooling fine-tuning dla dalszych ulepszeń.
 
 ##### Kluczowe kontrybucje
 1. Zmiana paradygmatu z chunkowania przed embeddingiem na chunkowanie po embeddingu zachowującego zależności kontekstowe między chunkami
-2. Podejście model-agnostyczne nie wymagające dodatkowego treningu dla podstawowych korzyści z demonstrowanymi poprawami retrieval
+2. Podejście model-agnostyczne nie wymagające dodatkowego treningu dla podstawowych korzyści z demonstrowanych korzyści dla retrievalu
 3. Skalowalne rozwiązanie (long late chunking) dla ogromnych dokumentów przekraczających okna kontekstu modelu
-4. Obliczeniowo bardziej efektywne niż alternatywy augmentacji kontekstowej oparte na LLM z natychmiastową praktyczną stosowalność
+4. Obliczeniowo bardziej efektywne niż alternatywy augmentacji kontekstowej oparte na LLM z natychmiastową stosowalnością w praktyce
 
 #### Imperceptible Jailbreaking against Large Language Models
 
-Ta praca wprowadza imperceptible jailbreaks wykorzystujące niewidoczne selektory wariacji Unicode do dołączania adversarialnych sufiksów do promptów. Ataki tworzą niewidoczne zmiany, które zmieniają wejście tokenizera, pozostając niewidoczne dla ludzkich czytelników, efektywnie omijając wyrównanie bezpieczeństwa różnych open-source LLM. Pipeline optymalizacji chain-of-search wydajnie generuje udane niewidoczne sufiksy w promptach i modelach z wysokimi wskaźnikami sukcesu w generowaniu szkodliwych outputów i prompt injection.
+Ta praca wprowadza imperceptible jailbreaks wykorzystujące niewidoczne selektory wariacji Unicode do dołączania wrogich sufiksów do promptów. Ataki tworzą niewidoczne zmiany, które wpływają na wejście tokenizera, pozostając niewidzialne dla ludzkich czytelników, efektywnie omijając uzgadnianie* bezpieczeństwa różnych open-source LLM. Pipeline optymalizacji chain-of-search wydajnie generuje udane, niewidoczne sufiksy dla różnych promptów i modeli, z wysoką szansą sukcesu w generowaniu szkodliwych outputów i prompt injection.
+
+*Uwaga: Uzgadnianie/dopasowanie modelu językowego jest (z reguły bazującym na RL) procesem uczenia modelu specyficznego stylu odpowiadania na konkretną klasę promptów.
 
 ##### Kluczowe kontrybucje
-1. Odkrycie nowej klasy podatności opartej na niewidocznych znakach Unicode omijających obecne mechanizmy bezpieczeństwa
+1. Odkrycie nowej klasy podatności opartej na niewidocznych znakach Unicode omijających obecne uzgodnienia bezpieczeństwa
 2. Demonstracja transferowalności ataku między wieloma architekturami LLM (Vicuna, Llama-2, Llama-3, Mistral)
-3. Optymalizacja chain-of-search umożliwiająca wydajne generowanie adversarialnych sufiksów
-4. Krytyczne ujawnienie podatności na poziomie tokenizera wymagające rewizji filtrowania wejścia i strategii wyrównania bezpieczeństwa
+3. Optymalizacja chain-of-search umożliwiająca wydajne generowanie wrogich sufiksów
+4. Krytyczne ujawnienie podatności na poziomie tokenizera wymagające rewizji filtrowania wejścia i strategii uzgadniania bezpieczeństwa
