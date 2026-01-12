@@ -226,7 +226,9 @@ Late Chunking introduces a novel approach to the generation of text chunk embedd
 
 #### Imperceptible Jailbreaking against Large Language Models
 
-This paper introduces imperceptible jailbreaks exploiting invisible Unicode variation selectors to append adversarial suffixes to prompts. The attacks create invisible changes that alter tokenizer input while remaining invisible to human readers, effectively bypassing safety alignment of various open-source LLMs. A chain-of-search optimization pipeline efficiently generates successful invisible suffixes across prompts and models with high success rates in harmful output generation and prompt injection.
+This paper introduces imperceptible jailbreaks exploiting invisible Unicode variation selectors to append adversarial suffixes to prompts. The attacks create invisible changes that alter tokenizer input while remaining unperceptible to human readers, effectively bypassing safety alignment* of various open-source LLMs. A chain-of-search optimization pipeline efficiently generates successful invisible suffixes across prompts and models with high success rates in harmful output generation and prompt injection.
+
+*Note: Alignment of LLM is a process (usually RL based) of learning the model to respond to a given class of inputs with a predefined manner.
 
 ##### Key contributions
 1. Discovery of a new vulnerability class based on invisible Unicode characters bypassing current safety mechanisms
