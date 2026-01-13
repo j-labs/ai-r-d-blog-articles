@@ -102,26 +102,29 @@ Takie podejście może być uzasadnione w specyficznych przypadkach, kiedy stand
 - Łatwość integracji z istniejącą infrastrukturą
 
 **Wady:**
-- Znacznie niższa wydajność (5-10x wolniejsze niż zoptymalizowane silniki)
-- Konieczność samodzielnej implementacji wielu optymalizacji
-- Problemy z zarządzaniem pamięcią przy dużych modelach
-- Wysokie ryzyko wycieków pamięci i innych problemów wydajnościowych
-- Trudności w implementacji funkcji takich jak continuous batching
+- Znacznie niższa wydajność (nawet 12-27x [wolniejsze](https://medium.com/@am5994/decomposing-llm-inference-optimizations-a-comparative-performance-study-of-vllm-tgi-and-naive-2fb20a0f5568) (TTFT) niż dedykowane silniki inferencji)
+- Budowa własnego silnika inferencji wiąże się z wysokim ryzykiem technicznym, ponieważ wymaga poprawnej i wydajnej implementacji niskopoziomowych optymalizacji (alokacja i zwalnianie pamięci, planowanie batchy, continuous batching), gdzie błędy łatwo prowadzą do wycieków pamięci i niestabilnej wydajności.
 
 ### Porównanie kluczowych cech
 
-| Cecha                      | vLLM                                      | TGI                          | Ollama | Podejście naiwne |
-|----------------------------|-------------------------------------------|------------------------------|----|------------------|
-| Wydajność GPU              | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐ |
-| Wydajność CPU              | ⭐⭐                                        | ⭐⭐⭐                          | ⭐⭐⭐ | ⭐⭐ |
-| Łatwość wdrożenia          | ⭐⭐⭐                                       | ⭐⭐⭐⭐                        | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| Skalowalność               | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐⭐ |
-| Optymalizacja pamięci      | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐ |
-| Obsługa dużych modeli      | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐⭐ |
-| Szybkość integracji        | ⭐⭐⭐⭐                                      | ⭐⭐⭐⭐                        | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| Wsparcie dla akceleratorów | NVIDIA, AMD, Intel Gaudi, CPU (częściowo) | NVIDIA, AMD, Intel Gaudi, CPU, Inferentia | NVIDIA, CPU | Dowolne |
-| Dojrzałość projektu        | ⭐⭐⭐⭐                                      | ⭐⭐⭐⭐⭐                        | ⭐⭐⭐ | n/a |
+Poniższa tabele prezentuje subiektywne, oparte na doświadczeniu swoim i autorów internetowych oszacowania ocen arbitralnych cech silników inferencji.
+
+
+| Cecha                      | vLLM                                      | TGI                          | Ollama | Podejście naiwne*         |
+|----------------------------|-------------------------------------------|------------------------------|----|---------------------------|
+| Wydajność GPU              | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐                         |
+| Wydajność CPU              | ⭐⭐                                        | ⭐⭐⭐                          | ⭐⭐⭐ | ⭐⭐                        |
+| Łatwość wdrożenia          | ⭐⭐⭐                                       | ⭐⭐⭐⭐                        | ⭐⭐⭐⭐⭐ | ⭐⭐                        |
+| Skalowalność               | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐⭐                        |
+| Optymalizacja pamięci      | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐                         |
+| Obsługa dużych modeli      | ⭐⭐⭐⭐⭐                                     | ⭐⭐⭐⭐                         | ⭐⭐ | ⭐⭐                        |
+| Szybkość integracji        | ⭐⭐⭐⭐                                      | ⭐⭐⭐⭐                        | ⭐⭐⭐⭐⭐ | ⭐⭐                        |
+| Wsparcie dla akceleratorów | NVIDIA, AMD, Intel Gaudi, CPU (częściowo) | NVIDIA, AMD, Intel Gaudi, CPU, Inferentia | NVIDIA, CPU | Dowolne                   |
+| Dojrzałość projektu        | ⭐⭐⭐⭐                                      | ⭐⭐⭐⭐⭐                        | ⭐⭐⭐ | n/a                       |
 | Najlepsze zastosowanie     | Produkcja, duża skala                     | Produkcja, ekosystem Hugging Face      | Rozwój, testowanie | Specjalistyczne przypadki |
+
+*bezpośrednia inferencja na PyTorch lub transformers.
+
 
 ## Podsumowanie
 
