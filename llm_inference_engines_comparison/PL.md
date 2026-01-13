@@ -102,7 +102,7 @@ Takie podejście może być uzasadnione w specyficznych przypadkach, kiedy stand
 - Łatwość integracji z istniejącą infrastrukturą
 
 **Wady:**
-- Znacznie niższa wydajność (nawet 12-27x [wolniejsze](https://medium.com/@am5994/decomposing-llm-inference-optimizations-a-comparative-performance-study-of-vllm-tgi-and-naive-2fb20a0f5568) (TTFT) niż dedykowane silniki inferencji)
+- Znacznie niższa wydajność (nawet 12-27x [wolniejsze](https://medium.com/@am5994/decomposing-llm-inference-optimizations-a-comparative-performance-study-of-vllm-tgi-and-naive-2fb20a0f5568) (TTFT dla Summary-16) niż dedykowane silniki inferencji)
 - Budowa własnego silnika inferencji wiąże się z wysokim ryzykiem technicznym, ponieważ wymaga poprawnej i wydajnej implementacji niskopoziomowych optymalizacji (alokacja i zwalnianie pamięci, planowanie batchy, continuous batching), gdzie błędy łatwo prowadzą do wycieków pamięci i niestabilnej wydajności.
 
 ### Porównanie kluczowych cech
