@@ -169,7 +169,7 @@ def top5_recall(
     return recall
 ```
 
-For more complex scenarios, developers can write heavily customized metrics:
+For more complex scenarios developers can write heavily customized metrics:
 
 ```python
 class TeacherGuidedJudgedMetric:
