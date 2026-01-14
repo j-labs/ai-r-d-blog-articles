@@ -2,9 +2,10 @@
 
 ## Wstęp
 
-W poprzednim artykule pokazaliśmy, jak **DSPy zastępuje ręczne promptowanie deklaratywnym programowaniem zachowania
-modeli językowych** oraz automatyczną optymalizacją pipeline’ów. Sygnatury, moduły i optymalizery pozwalają znaleźć
-skuteczne strategie bez manualnego dostrajania promptów.
+W [poprzednim artykule pokazaliśmy](https://github.com/j-labs/ai-r-d-blog-articles/blob/master/DSPy/intro/PL.md), jak
+**DSPy zastępuje ręczne promptowanie deklaratywnym programowaniem zachowania modeli językowych** oraz automatyczną
+optymalizacją pipeline’ów. Sygnatury, moduły i optymalizery pozwalają znaleźć skuteczne strategie bez manualnego
+dostrajania promptów.
 
 Kolejnym krokiem jest pytanie: **co zrobić z tym zoptymalizowanym zachowaniem dalej?**
 Jak przenieść je do środowiska produkcyjnego, gdzie kluczowe są koszt inferencji, latency i skalowalność?
@@ -26,19 +27,20 @@ prawdopodobieństwa, lecz o przejęcie **zachowania modelu** - sposobu, w jaki o
 sobie z niejednoznacznością.
 
 W praktyce teacherem jest zazwyczaj duży model bazowy, działający w trybie zero‑shot lub few‑shot, który wykorzystuje
-wiedzę wyniesioną z pretreningu. To właśnie jego odpowiedzi, formaty wyjściowe i heurystyki stają się materiałem uczącym.
-Student nie przejmuje pełnej wiedzy teacher'a, lecz uczy się wzorca zachowania - czyli jak odpowiadać na określone typy
-zadań, zachowaniem określonego stylu i struktury, a nie co dokładnie wie teacher.
+wiedzę wyniesioną z pretreningu. To właśnie jego odpowiedzi, formaty wyjściowe i heurystyki stają się materiałem
+uczącym. Student nie przejmuje pełnej wiedzy teacher'a, lecz uczy się wzorca zachowania - czyli jak odpowiadać na
+określone typy zadań, zachowaniem określonego stylu i struktury, a nie co dokładnie wie teacher.
 
 Takie podejście ma istotne konsekwencje praktyczne. Po pierwsze, eliminuje konieczność ręcznego etykietowania danych -
-teacher generuje pseudo-etykiety, czyli automatycznie wytworzone etykiety i odpowiedzi (wraz z krokami pośrednimi), 
-które są następnie traktowane jak dane treningowe dla modelu studenta. Po drugie, umożliwia znaczną redukcję kosztów 
-inferencji, ponieważ zachowanie drogiego modelu może zostać skompresowane do wag mniejszego studenta. Wreszcie, pozwala 
-budować modele wyspecjalizowane w wąskich zadaniach, takich jak Text-to-SQL czy klasyfikacja, bez trenowania ich od zera.
+teacher generuje pseudo-etykiety, czyli automatycznie wytworzone etykiety i odpowiedzi (wraz z krokami pośrednimi),
+które są następnie traktowane jak dane treningowe dla modelu studenta. Po drugie, umożliwia znaczną redukcję kosztów
+inferencji, ponieważ zachowanie drogiego modelu może zostać skompresowane do wag mniejszego studenta. Wreszcie, pozwala
+budować modele wyspecjalizowane w wąskich zadaniach, takich jak Text-to-SQL czy klasyfikacja, bez trenowania ich od
+zera.
 
 Jednocześnie paradygmat Teacher–Student nie jest pozbawiony ograniczeń. Student może przejąć błędy lub biasy teacher'a,
 a destylacja zachowania często prowadzi do utraty zaawansowanych zdolności obecnych dużych modelach takich jak złożone
-rozumowanie, elastyczne rozumienie instrukcji, spójność przy długim kontekście. Istnieje również ryzyko nadmiernego 
+rozumowanie, elastyczne rozumienie instrukcji, spójność przy długim kontekście. Istnieje również ryzyko nadmiernego
 dopasowania do stylu odpowiedzi teacher'a kosztem generalizacji. Z tego powodu skuteczność distillation zależy nie tylko
 od architektury studenta, lecz także od jakości i spójności zachowania modelu nauczyciela.
 
@@ -165,7 +167,7 @@ optimizer = dspy.BootstrapFinetune(
 )
 ```
 
-### 3. Przygotowanie danych do fine-tuningu
+### 4. Przygotowanie danych do fine-tuningu
 
 Ten etap dotyczy przetworzenia **śladu wykonania programu teacher'a** na dane akceptowane przez backend fine-tuningu.
 
@@ -196,7 +198,7 @@ Może to być na przykład **format czatu** (listy wiadomości `user` / `assista
 }
 ```
 
-### 4. Fine-tuning i aktualizacja programu
+### 5. Fine-tuning i aktualizacja programu
 
 W ostatnim kroku **BootstrapFinetune** wywołuje metodę `finetune()` na modelu przypisanym do studenta, delegując
 faktyczny trening wag do wybranego providera. Po zakończeniu treningu nowy model jest automatycznie podpinany do
@@ -224,7 +226,8 @@ nie wymaga już uruchamiania teacher'a w czasie inferencji.
 
 Jednym z istotnych elementów projektu **BootstrapFinetune** jest to, że sam optimizer **nie implementuje treningu modelu
 bezpośrednio**. Zamiast tego opiera się na abstrakcji metody `finetune()` dostępnej na obiekcie `LM`. Dzięki temu logika
-destylacji (zbieranie śladów, filtrowanie, przygotowanie danych) jest oddzielona od **konkretnego backendu treningowego**.
+destylacji (zbieranie śladów, filtrowanie, przygotowanie danych) jest oddzielona od **konkretnego backendu 
+treningowego**.
 
 Z perspektywy kodu DSPy:
 
@@ -449,6 +452,7 @@ granicę między projektowaniem zachowania modelu a inżynierią jego wag.
 ---
 
 ## Źródła
+
 - [Teacher-Student Architecture for Knowledge Distillation: A Survey - arXiv:2308.04268v1](https://arxiv.org/pdf/2308.04268)
 - [Tutorial DSPy - classification finetuning](https://dspy.ai/tutorials/classification_finetuning/)
 - [Dokumentacja BootstrapFinetune](https://dspy.ai/api/optimizers/BootstrapFinetune/)
