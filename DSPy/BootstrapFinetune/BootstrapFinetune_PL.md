@@ -61,9 +61,8 @@ DSPy traktuje **optymalizację programu** jako problem algorytmiczny. Różne op
 * **Optymalizacja wag (fine‑tuning)**
   Destylacja programu promptowego do wag modelu - dokładnie to robi **`BootstrapFinetune`**.
 
-W praktyce często zaczyna się od few‑shotów i promptów, a **BootstrapFinetune** może być ostatnim krokiem prowadzącym do
-modelu produkcyjnego.
-
+W praktyce często zaczyna się od few‑shotów i promptów, a **BootstrapFinetune** może być dodatkowym krokiem, prowadzącym
+do mniejszego i tańszego modelu produkcyjnego.
 
 ---
 
