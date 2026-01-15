@@ -17,9 +17,7 @@ This paper presents Miras, a framework that abstracts modern sequence models (Tr
 ##### Key contributions
 1. Theoretical unification of sequence modeling architectures through the lens of associative memory and online optimization
 2. Four-component design framework (memory architecture, attentional bias, retention mechanism, learning algorithm) enabling systematic architecture exploration
-3. Three novel architectures (Moneta, Yaad, Memora**) with alternative objectives that outperform existing baselines
-
-**Note: Memora performs the worst in explored parameter ranges, but has the strongest stability guarantees, so potentially might be easier to train at scale.
+3. Three novel architectures (Moneta, Yaad, Memora**) with alternative objectives that outperform existing baselines  **Note: Memora performs the worst in explored parameter ranges, but has the strongest stability guarantees, so potentially might be easier to train at scale.
 
 #### [Titans: Learning to Memorize at Test Time](https://arxiv.org/pdf/2501.00663)
 
@@ -36,8 +34,8 @@ Titans introduces a family of architectures featuring a novel neural long-term m
 
 This paper identifies and resolves a fundamental limitation in modern Linear Recurrent Neural Networks (LRNNs) like Mamba and DeltaNet: their inability to perform state-tracking tasks due to eigenvalue restrictions. The authors prove that LRNNs with state-transition matrix* eigenvalues restricted to [0, 1] cannot solve tasks like parity and modular counting in finite precision, and that non-triangular matrices are needed for general modular counting. Critically, they demonstrate that expanding the eigenvalue range to [−1, 1] dramatically enhances expressive power, enabling LRNNs to solve all regular languages** through products of generalized Householder matrices***.
 
-*Note: State-transition matrix is a matrix that describes how the hidden state evolves over time.
-**Note: Regular languages are a class of formal languages that can be recognized by finite state automata.
+*Note: State-transition matrix is a matrix that describes how the hidden state evolves over time.  
+**Note: Regular languages are a class of formal languages that can be recognized by finite state automata.  
 ***Note: this generalization allows rotation in addition to vector reflection.
 
 ##### Key contributions
@@ -59,7 +57,7 @@ As language models scale to billions of parameters and multi-million token conte
 
 DeepSeek-V3.2-Exp introduces DeepSeek Sparse Attention (DSA), which uses a lightning indexer and fine-grained token selection* to implement efficient sparse attention. The model is created through continued training of DeepSeek-V3.1-Terminus, following a pipeline of continual pre-training (dense warm-up**, sparse adaptation) and two stage post-training. Proposed attention architecture significantly reduces computation costs (each query token attends to a small, fixed subset of keys), especially for very long contexts, while maintaining comparable performance across general, code, math and agentic search tasks.
 
-*Note: indexer essentially computes a weighted dot product score between fp8 projections of queries and keys, while selector retrieves top-k from it.
+*Note: indexer essentially computes a weighted dot product score between fp8 projections of queries and keys, while selector retrieves top-k from it.  
 **Note: warm-up is used to initialize indexer weights.
 
 ##### Key contributions
@@ -76,15 +74,13 @@ This work systematically investigates integrating gating mechanisms into attenti
 ##### Key contributions
 1. Comprehensive empirical analysis of gating mechanisms in attention across two parameters scales, multiple compute levels and architectures
 2. Identification of two complementary improvement mechanisms: non-linearity and input-dependent sparsity
-3. Elimination of attention sink, enabling better long-context generalization**
-
-**Note: thanks to savings in precision of attention scores previously wasted on massive sink score.
+3. Elimination of attention sink, enabling better long-context generalization**  **Note: thanks to savings in precision of attention scores previously wasted on massive sink score.
 
 #### [REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding](https://arxiv.org/pdf/2512.13586)
 
 REFUSION introduces a novel LLM framework combining masked diffusion model (MDM) parallelism with slot-level autoregressive infilling*. The architecture partitions sequences into fixed-length slots and employs a two-stage "plan-and-infill" decoding: diffusion-based global planning identifies weakly dependent slots for parallel processing**, then autoregressive infilling generates tokens within each slot sequentially. This enables full reuse of key-value caches while avoiding token-level incoherence, trained with a hybrid objective optimizing both global planning and local infilling.
 
-*Note: in simpler words: it is a hybrid approach that marries autoregressive LLMs with diffusion models.
+*Note: in simpler words: it is a hybrid approach that marries autoregressive LLMs with diffusion models.  
 **Note: empirically grounded heuristic here is that weakly dependent slots have low confidence score (globally), thus can potentially "ignore" each other during decoding.
 
 ##### Key contributions
@@ -202,7 +198,7 @@ This group addresses the practical challenges of deploying AI systems at an indu
 
 OnePiece introduces a unified framework enhancing industrial ranking systems by integrating LLM-style context engineering and reasoning. The system enriches input representations via structured context engineering (user history, preference anchors from expert knowledge, situational descriptors, candidate item sets), implements block-wise latent reasoning for multi-step bandwidth-scalable reasoning* and adopts progressive multi-task training** using natural feedback signals (click, add-to-cart, purchase) as supervision for reasoning stages.
 
-*Note: Wider information channel between reasoning steps by using multiple tokens instead of 1 as previously proposed.
+*Note: Wider information channel between reasoning steps by using multiple tokens instead of 1 as previously proposed.  
 **Note: Progressiveness prevents competing gradients from multiple feedback signals.
 
 
@@ -210,7 +206,7 @@ OnePiece introduces a unified framework enhancing industrial ranking systems by 
 1. Systematic adaptation of LLM paradigm mechanisms (context engineering, multi-step reasoning) to discriminative industrial ranking
 2. Block-wise latent reasoning architecture enabling scalable multi-step reasoning over rich input representations
 3. Production deployment at Shopee's scale showing higher advertising revenue and user's merchandise value with improved efficiency
-4. Superior parameter/data efficiency and hardware utilization compared to highly optimized entrenched baselines (DLRM, HSTU)***
+4. Superior parameter/data efficiency and hardware utilization compared to highly optimized entrenched baselines (DLRM, HSTU)***  
 
 ***Note: DLRM is Shopee's production baseline recommendation model, while HSTU is a state-of-the-art recommendation framework from Meta.
 

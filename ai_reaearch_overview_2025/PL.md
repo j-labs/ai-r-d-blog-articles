@@ -18,7 +18,7 @@ Publikacja prezentuje Miras, framework abstrahujący nowoczesne modele sekwencyj
 1. Teoretyczne ujednolicenie architektur modelowania sekwencji przez pryzmat pamięci asocjacyjnej i optymalizacji online
 2. Framework projektowy czteroskładnikowy (architektura pamięci, attentional bias, mechanizm retencji, algorytm uczenia) umożliwiający systematyczną eksplorację architektur
 3. Trzy nowe architektury (Moneta, Yaad, Memora**) z alternatywnymi celami przewyższające istniejące baseline'y
-
+  
 **Uwaga: Memora osiąga najgorsze wyniki w eksplorowanych zakresach parametrów, ale ma najsilniejsze gwarancje stabilności, więc potencjalnie może być łatwiejsza do trenowania w dużej skali.
 
 #### [Titans: Learning to Memorize at Test Time](https://arxiv.org/pdf/2501.00663)
@@ -36,8 +36,8 @@ Titans wprowadza rodzinę architektur z nowym modułem neuronowej pamięci dług
 
 Publikacja identyfikuje i rozwiązuje fundamentalne ograniczenie w nowoczesnych Linear Recurrent Neural Networks (LRNN) jak Mamba i DeltaNet: ich niezdolność do wykonywania zadań śledzenia stanu z powodu restrykcji wartości własnych. Autorzy dowodzą, że LRNN z wartościami własnymi macierzy przejścia* ograniczonymi do [0, 1] nie mogą rozwiązać zadań takich jak parzystość i liczenie modularne w skończonej precyzji, oraz że macierze nietrójkątne są potrzebne do ogólnego liczenia modularnego. Co kluczowe, demonstrują, że rozszerzenie zakresu wartości własnych do [−1, 1] dramatycznie zwiększa moc ekspresyjną, umożliwiając LRNN rozwiązanie wszystkich języków regularnych** poprzez iloczyny uogólnionych macierzy Householdera***.
 
-*Uwaga: Macierz przejścia jest macierzą opisującą ewolucję hidden state w czasie.
-**Uwaga: Języki regularne to klasa języków formalnych rozpoznawanych przez automaty skończone.
+*Uwaga: Macierz przejścia jest macierzą opisującą ewolucję hidden state w czasie.  
+**Uwaga: Języki regularne to klasa języków formalnych rozpoznawanych przez automaty skończone.  
 ***Uwaga: ta generalizacja pozwala także na rotację oprócz odbicia wektora.
 
 ##### Kluczowe kontrybucje
@@ -59,7 +59,7 @@ W miarę jak modele językowe skalują się do miliardów parametrów i milionó
 
 DeepSeek-V3.2-Exp wprowadza DeepSeek Sparse Attention (DSA), która używa lightning indexer i fine-grained token selection* do implementacji efektywnej sparse attention. Model jest tworzony poprzez kontynuację treningu DeepSeek-V3.1-Terminus, zgodnie z pipeline'm continual pre-trainingu (dense warm-up**, sparse adaptation) i dwustopniowego post-trainingu. Proponowana architektura atencji znacząco redukuje koszty obliczeń (każdy token query zwraca uwagę na mały, stały podzbiór keys), szczególnie dla bardzo długich kontekstów, zachowując porównywalną wydajność w ogólnych, programistycznych, matematycznych i agentycznych zadaniach wyszukiwania.
 
-*Uwaga: indexer zasadniczo oblicza ważony wynik iloczynu skalarnego między projekcjami fp8 queries i keys, podczas gdy selektor wybiera top-k z niego.
+*Uwaga: indexer zasadniczo oblicza ważony wynik iloczynu skalarnego między projekcjami fp8 queries i keys, podczas gdy selektor wybiera top-k z niego.  
 **Uwaga: warm-up jest używany do inicjalizacji wag indexera.
 
 ##### Kluczowe kontrybucje
@@ -77,14 +77,14 @@ Publikacja systematycznie bada integrację mechanizmów bramkowych w warstwy ate
 1. Kompleksowa analiza empiryczna mechanizmów bramkowych w atencji w dwóch skalach parametrów, wielu poziomach obliczeń i architekturach
 2. Identyfikacja dwóch komplementarnych mechanizmów poprawy: nieliniowości i attention sparsity zależnej od wejścia
 3. Eliminacja attention sink, umożliwiająca lepszą generalizację długiego kontekstu**
-
+  
 **Uwaga: dzięki oszczędnościom w precyzji attention scores wcześniej zmarnowanych na wysoki score attention sink.
 
 #### [REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding](https://arxiv.org/pdf/2512.13586)
 
 REFUSION wprowadza nowy framework LLM łączący paralelizm maskujących modeli dyfuzyjnych (MDM) z autoregresywnym wypełnianiem na poziomie slotów*. Architektura dzieli sekwencje na sloty o stałej długości i stosuje dwustopniowe dekodowanie "plan-and-infill": planowanie globalne oparte na dyfuzji identyfikuje słabo zależne sloty do równoległego przetwarzania**, następnie autoregresywne wypełnianie generuje tokeny w każdym slocie sekwencyjnie. To umożliwia pełne ponowne użycie key-value cache, unikając niespójności na poziomie tokenów, trenowane z hybrydową funckją straty optymalizującą zarówno planowanie globalne, jak i wypełnianie lokalne.
 
-*Uwaga: prostszymi słowami: to hybrydowe podejście łączące autoregresywne LLM z modelami dyfuzyjnymi.
+*Uwaga: prostszymi słowami: to hybrydowe podejście łączące autoregresywne LLM z modelami dyfuzyjnymi.  
 **Uwaga: zastosowana tutaj empirycznie uzasadniona heurystyka polega na tym, że słabo zależne sloty mają niską ocenę pewności (globalnie), więc mogą potencjalnie "ignorować" się nawzajem podczas dekodowania.
 
 ##### Kluczowe kontrybucje
@@ -202,7 +202,7 @@ Ta grupa rozwiązuje praktyczne wyzwania wdrażania systemów AI na skalę przem
 
 OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy rankingowe poprzez integrację context engineering i rozumowania w stylu LLM. System wzbogaca reprezentacje wejściowe poprzez strukturalny context engineering (historia użytkownika, kotwice preferencji z wiedzy eksperckiej, deskryptory sytuacyjne, zestawy przedmiotów kandydujących), implementuje block-wise latent reasoning dla wieloetapowego rozumowania skalowalnego pod względem przepustowości* i przyjmuje progresywny trening multi-task** używając naturalnych sygnałów feedbacku (kliknięcie, dodaj-do-koszyka, zakup) jako superwizji dla etapów rozumowania.
 
-*Uwaga: Szerszy kanał informacyjny między krokami rozumowania poprzez użycie wielu tokenów zamiast 1 jak wcześniej proponowano.
+*Uwaga: Szerszy kanał informacyjny między krokami rozumowania poprzez użycie wielu tokenów zamiast 1 jak wcześniej proponowano.  
 **Uwaga: Progresywność zapobiega konkurowaniu gradientów z wielu sygnałów feedbacku.
 
 ##### Kluczowe kontrybucje
@@ -210,7 +210,7 @@ OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy ran
 2. Architektura block-wise latent reasoning umożliwiająca skalowalne, wieloetapowe rozumowanie nad bogatymi reprezentacjami wejściowymi
 3. Wdrożenie produkcyjne na skalę Shopee pokazujące wyższe przychody reklamowe i wartość towarów użytkownika wraz z poprawioną efektywnością
 4. Lepsza efektywność parametrów/danych i wykorzystanie sprzętu w porównaniu do wysoce zoptymalizowanych i ugruntowanych baseline'ów (DLRM, HSTU)***
-
+  
 ***Uwaga: DLRM to produkcyjny baseline model rekomendacji Shopee, podczas gdy HSTU to state-of-the-art framework rekomendacji od Meta.
 
 #### [Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models](https://arxiv.org/pdf/2409.04701)
