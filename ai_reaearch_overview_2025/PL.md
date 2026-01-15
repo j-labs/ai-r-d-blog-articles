@@ -8,7 +8,7 @@ Ta grupa prezentuje fundamentalne postępy w tym, jak sieci neuronowe przetwarza
 
 ### Publikacje
 
-#### It's All Connected: A Journey Through Test-Time Memorization, Attentional Bias, Retention and Online Optimization
+#### [It's All Connected: A Journey Through Test-Time Memorization, Attentional Bias, Retention and Online Optimization](https://arxiv.org/pdf/2504.13173)
 
 Publikacja prezentuje Miras, framework abstrahujący nowoczesne modele sekwencyjne (Transformery, Titans, liniowe RNN, etc.) jako moduły pamięci z attentional bias optymalizujące wewnętrzne cele. Framework ujawnia, że większość istniejących architektur używa dot-product similarity lub regresji L2, i jest oparty na czterech wyborach projektowych: architektura pamięci asocjacyjnej, równanie attentional bias, retention gates (reinterpretujące forget gates jako regularyzację retencji) i algorytmy uczenia pamięci. Opierając się na tych spostrzeżeniach, autorzy proponują trzy nowe modele sekwencyjne: Moneta, Yaad i Memora, które używają alternatywnych attentional bias (odległość Minkowskiego, funkcja straty Hubera) i mechanizmów retencji (w istocie forget gate; odległość Minkowskiego, dywergencja KL), demonstrując obiecującą* wydajność w modelowaniu języka, rozumowaniu zdroworozsądkowym i zadaniach intensywnych pod względem przypominania z ulepszonymi wzorcami skalowania.
 
@@ -21,7 +21,7 @@ Publikacja prezentuje Miras, framework abstrahujący nowoczesne modele sekwencyj
 
 **Uwaga: Memora osiąga najgorsze wyniki w eksplorowanych zakresach parametrów, ale ma najsilniejsze gwarancje stabilności, więc potencjalnie może być łatwiejsza do trenowania w dużej skali.
 
-#### Titans: Learning to Memorize at Test Time
+#### [Titans: Learning to Memorize at Test Time](https://arxiv.org/pdf/2501.00663)
 
 Titans wprowadza rodzinę architektur z nowym modułem neuronowej pamięci długoterminowej, który uczy się zapamiętywać w czasie testowania, używając aktualizacji opartych na gradiencie z bezwładnością i weight decay. Architektura traktuje zaskakujące wydarzenia jako warte zapamiętania i proponuje trzy warianty: Memory as Context (MAC)*, Memory as Gate (MAG) i Memory as Layer (MAL). Łączą one pamięć neuronową dla kontekstu długoterminowego z atencją dla zależności krótkoterminowych i pamięć trwałą dla wiedzy o zadaniu, adresując kwadratową złożoność Transformerów i słabą kompresję liniowych modeli rekurencyjnych.
 
@@ -32,7 +32,7 @@ Titans wprowadza rodzinę architektur z nowym modułem neuronowej pamięci dług
 2. Trzy warianty architektoniczne (MAC, MAG, MAL) integrujące pamięć długoterminową z atencją poprzez różne mechanizmy
 3. Efektywne skalowanie do okien kontekstu 2M+ z atrakcyjnymi wynikami względem konkurencyjnych architektur
 
-#### Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues
+#### [Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues](https://arxiv.org/pdf/2411.12537)
 
 Publikacja identyfikuje i rozwiązuje fundamentalne ograniczenie w nowoczesnych Linear Recurrent Neural Networks (LRNN) jak Mamba i DeltaNet: ich niezdolność do wykonywania zadań śledzenia stanu z powodu restrykcji wartości własnych. Autorzy dowodzą, że LRNN z wartościami własnymi macierzy przejścia* ograniczonymi do [0, 1] nie mogą rozwiązać zadań takich jak parzystość i liczenie modularne w skończonej precyzji, oraz że macierze nietrójkątne są potrzebne do ogólnego liczenia modularnego. Co kluczowe, demonstrują, że rozszerzenie zakresu wartości własnych do [−1, 1] dramatycznie zwiększa moc ekspresyjną, umożliwiając LRNN rozwiązanie wszystkich języków regularnych** poprzez iloczyny uogólnionych macierzy Householdera***.
 
@@ -55,7 +55,7 @@ W miarę jak modele językowe skalują się do miliardów parametrów i milionó
 
 ### Publikacje
 
-#### DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention
+#### [DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/main/DeepSeek_V3_2.pdf)
 
 DeepSeek-V3.2-Exp wprowadza DeepSeek Sparse Attention (DSA), która używa lightning indexer i fine-grained token selection* do implementacji efektywnej sparse attention. Model jest tworzony poprzez kontynuację treningu DeepSeek-V3.1-Terminus, zgodnie z pipeline'm continual pre-trainingu (dense warm-up**, sparse adaptation) i dwustopniowego post-trainingu. Proponowana architektura atencji znacząco redukuje koszty obliczeń (każdy token query zwraca uwagę na mały, stały podzbiór keys), szczególnie dla bardzo długich kontekstów, zachowując porównywalną wydajność w ogólnych, programistycznych, matematycznych i agentycznych zadaniach wyszukiwania.
 
@@ -67,7 +67,7 @@ DeepSeek-V3.2-Exp wprowadza DeepSeek Sparse Attention (DSA), która używa light
 2. Kompleksowy pipeline treningu umożliwiający zmianę wcześniej wytrenowanego modelu dense na sparse
 3. Ogromna redukcja kosztów wnioskowania dla scenariuszy długiego kontekstu bez degradacji dokładności
 
-#### Gated Attention for Large Language Models: Non-linearity, Sparsity and Attention-Sink-Free
+#### [Gated Attention for Large Language Models: Non-linearity, Sparsity and Attention-Sink-Free](https://arxiv.org/pdf/2505.06708)
 
 Publikacja systematycznie bada integrację mechanizmów bramkowych w warstwy atencji dużych modeli językowych poprzez eksperymenty na wielu wariantach modeli (w tym 15B MoE i 1.7B dense) trenowanych do 3.5 biliona tokenów. Badanie wprowadza prostą bramkę sigmoidalną specyficzną dla konkretnych attention-head po Scaled Dot-Product Attention, ujawniając dwa kluczowe mechanizmy poprawy: zwiększoną ekspresyjność poprzez nieliniowość między atencją a warstwami wyjściowymi, oraz attention sparsity zależną od wejścia* eliminującą efekt "attention sink".
 
@@ -80,7 +80,7 @@ Publikacja systematycznie bada integrację mechanizmów bramkowych w warstwy ate
 
 **Uwaga: dzięki oszczędnościom w precyzji attention scores wcześniej zmarnowanych na wysoki score attention sink.
 
-#### REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding
+#### [REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding](https://arxiv.org/pdf/2512.13586)
 
 REFUSION wprowadza nowy framework LLM łączący paralelizm maskujących modeli dyfuzyjnych (MDM) z autoregresywnym wypełnianiem na poziomie slotów*. Architektura dzieli sekwencje na sloty o stałej długości i stosuje dwustopniowe dekodowanie "plan-and-infill": planowanie globalne oparte na dyfuzji identyfikuje słabo zależne sloty do równoległego przetwarzania**, następnie autoregresywne wypełnianie generuje tokeny w każdym slocie sekwencyjnie. To umożliwia pełne ponowne użycie key-value cache, unikając niespójności na poziomie tokenów, trenowane z hybrydową funckją straty optymalizującą zarówno planowanie globalne, jak i wypełnianie lokalne.
 
@@ -92,7 +92,7 @@ REFUSION wprowadza nowy framework LLM łączący paralelizm maskujących modeli 
 2. Dwustopniowy algorytm dekodowania plan-and-infill umożliwiający efektywną równoległość bez utraty jakości
 3. Pełna możliwość ponownego użycia cache'a KV zwiększająca efektywność o 2.33× względem czysto autoregresywnego baseline'u
 
-#### SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity
+#### [SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity](https://arxiv.org/pdf/2506.16500)
 
 SparseLoRA przyspiesza fine-tuning LLM wykorzystując contextual sparsity, dynamicznie wybierając rzadkie podzbiory wag dla obliczeń gradientu i straty używając opartego na SVD estymatora rzadkości bez treningu. Metoda aplikuje rzadkość do macierzy wag selektywnie poprzez warstwy, tokeny i kroki treningu* z minimalnym narzutem. W przeciwieństwie do wcześniejszych podejść PEFT, które głównie redukują pamięć, SparseLoRA bezpośrednio poprawia efektywność obliczeń.
 
@@ -114,7 +114,7 @@ Ta grupa demonstruje dojrzałość modeli podstawowych innych niż tekstowe, ust
 
 ### Publikacje
 
-#### SAM Audio: Segment Anything in Audio
+#### [SAM Audio: Segment Anything in Audio](https://arxiv.org/pdf/2512.18099)
 
 SAM Audio jest modelem podstawowym dla generycznej separacji ścieżek audio, który ujednolica promptowanie tekstowe, wizualne i zakresów czasowych w ramach pojedynczej architektury diffusion transformer. Zbudowany na flow matching* i trenowany na dużych ilościach danych audio obejmujących mowę, muzykę i inne dźwięki, osiąga najlepszą w swej klasie wydajność w różnorodnych benchmarkach. Publikacja wprowadza span prompting jako nowy mechanizm warunkowania temporalnego i wydaje SAM Audio-Bench (kompleksowy benchmark separacji multimodalnej z promptami oznaczonymi przez ludzi) i SAM Audio Judge (model ewaluacji bez referencji silnie skorelowany z oceną ludzką).
 
@@ -124,7 +124,7 @@ SAM Audio jest modelem podstawowym dla generycznej separacji ścieżek audio, kt
 1. Pierwszy model podstawowy osiągający SOTA w wielu domenach audio (mowa, muzyka, ogólne dźwięki) z ujednoliconym promptowaniem multimodalnym
 2. Nowy mechanizm span prompting dla warunkowania temporalnego w zadaniach separacji audio
 
-#### Perception Encoder: The best visual embeddings are not at the output of the network
+#### [Perception Encoder: The best visual embeddings are not at the output of the network](https://arxiv.org/pdf/2504.13181)
 
 Perception Encoder wprowadza, najlepszą w swojej klasie, rodzinę enkoderów wizualnych odkrywając, że silne ogólne ficzery dla różnorodnych zadań downstream istnieją w warstwach pośrednich modeli trenowanych kontrastowo, a nie w warstwie wyjściowej. Praca rozwija PEcore (solidny, wizualny pretraining), PElang (wariant dostosowany językowo) i PEspatial (wariant dostosowany przestrzennie).
 
@@ -134,7 +134,7 @@ Perception Encoder wprowadza, najlepszą w swojej klasie, rodzinę enkoderów wi
 3. Strategie dostosowania specyficzne dla zadań (językowe i przestrzenne) osiągające SOTA w detekcji, VQA i rozumieniu wideo
 4. Wydanie modelu o 2B parametrów, kodu i PE Video Dataset (1M filmów, 120K adnotacji udoskonalonych przez ludzi)
 
-#### One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation
+#### [One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation](https://arxiv.org/pdf/2512.07829)
 
 Ta praca wprowadza FAE (Feature Auto-Encoder), minimalistyczny framework adaptujący wytrenowane self-supervised reprezentacje wizualne (DINOv2, SigLIP)* do low-dimensional latents dla modeli generatywnych. Kluczową innowacją jest użycie pojedynczej warstwy self-attention do kompresji embeddingów o wysokiej wymiarowości, po której następuje architektura double-decoder oddzielająca rekonstrukcję ficzerów od syntezy obrazu. To podejście przezwycięża niekompatybilność między przestrzeniami ficzerów zorientowanymi na rozumienie a ficzerami przyjaznymi dla generowania bez złożonych funkcji straty lub znaczących zmian architektonicznych.
 
@@ -156,7 +156,7 @@ Ta grupa reprezentuje fundamentalne przeformułowanie tego, jak systemy AI podch
 
 ### Publikacje
 
-#### ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration
+#### [ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/pdf/2511.21689)
 
 ToolOrchestra wprowadza metodologię treningu małych modeli językowych do pełnienia funkcji agentów orkiestracji zarządzających zarówno tradycyjnymi narzędziami (wyszukiwanie w sieci, interpretery kodu), jak i różnorodnymi modelami językowymi jako narzędziami zewnętrznymi. Model Orchestrator-8B jest trenowany end-to-end poprzez reinforcement learning, kierowany przez poprawność wyników, efektywność (koszt i opóźnienie) oraz dopasowanie do preferencji użytkownika. Podejście obejmuje użycie ToolScale - dużego, syntetycznego benchmarku dla wieloetapowych zadań agenta narzędziowego, osiągając lepszą wydajność i efektywność kosztową względem monolitycznych LLM, w tym GPT-5.
 
@@ -166,7 +166,7 @@ ToolOrchestra wprowadza metodologię treningu małych modeli językowych do peł
 3. Ogromne zyski efektywności: Orchestrator-8B przewyższa znacznie większe modele za ułamek kosztu obliczeń
 4. Doskonała generalizacja do nieznanych narzędzi, zadań i preferencji użytkowników, testowana z użyciem benchmarku ToolScale
 
-#### Less is More: Recursive Reasoning with Tiny Networks
+#### [Less is More: Recursive Reasoning with Tiny Networks](https://arxiv.org/pdf/2510.04871)
 
 Ta publikacja wprowadza Tiny Recursive Model (TRM), uproszczoną architekturę rozumowania rekurencyjnego używającą pojedynczej, małej (2-warstwowej, 7M parametrów) sieci neuronowej, która przewyższa zarówno Hierarchical Reasoning Model (HRM), jak i duże modele językowe w trudnych zadaniach jak Sudoku, Maze i ARC-AGI z minimalną ilością danych treningowych (~1,000 przykładów). W przeciwieństwie do złożonej, dualnej hierarchii sieciowej HRM, TRM używa eleganckiego projektu pojedynczej sieci, która przełącza się między aktualizacjami stanu ukrytego a udoskonalaniem rozwiązania z głęboką superwizją i prostymi kryteriami stopu.
 
@@ -176,7 +176,7 @@ Ta publikacja wprowadza Tiny Recursive Model (TRM), uproszczoną architekturę r
 3. Dowód, że głęboka rekurencja z małymi sieciami unika nadmiernego dopasowania i maksymalizuje generalizację w reżimach małych ilości danych
 4. Wyzwanie dla paradygmatu zorientowanego na skalę: projekt architektoniczny ważniejszy niż liczba parametrów dla strukturalnego rozumowania
 
-#### LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics
+#### [LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics](https://arxiv.org/pdf/2511.08544)
 
 LeJEPA wprowadza teoretycznie zasadniczy framework dla self-supervised learning w ramach paradygmatu Joint-Embedding Predictive Architecture. Kluczowym spostrzeżeniem jest to, że izotropowe embeddingi Gaussowskie* wyjątkowo dobrze minimalizują ryzyko predykcji w szerokich rodzinach zadań downstream. LeJEPA łączy stratę predykcyjną z Sketched Isotropic Gaussian Regularization (SIGReg), która (jak udowodniono) wymusza izotropowość Gaussowską używając skalowalnych, lekkich w hiperparametrach, różniczkowalnych metod opartych na projekcji, eliminując kruche heurystyki jak stop-gradient i modele teacher-student.
 
@@ -198,7 +198,7 @@ Ta grupa rozwiązuje praktyczne wyzwania wdrażania systemów AI na skalę przem
 
 ### Publikacje
 
-#### OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System
+#### [OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System](https://arxiv.org/pdf/2509.18091)
 
 OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy rankingowe poprzez integrację context engineering i rozumowania w stylu LLM. System wzbogaca reprezentacje wejściowe poprzez strukturalny context engineering (historia użytkownika, kotwice preferencji z wiedzy eksperckiej, deskryptory sytuacyjne, zestawy przedmiotów kandydujących), implementuje block-wise latent reasoning dla wieloetapowego rozumowania skalowalnego pod względem przepustowości* i przyjmuje progresywny trening multi-task** używając naturalnych sygnałów feedbacku (kliknięcie, dodaj-do-koszyka, zakup) jako superwizji dla etapów rozumowania.
 
@@ -213,7 +213,7 @@ OnePiece wprowadza ujednolicony framework wzmacniający przemysłowe systemy ran
 
 ***Uwaga: DLRM to produkcyjny baseline model rekomendacji Shopee, podczas gdy HSTU to state-of-the-art framework rekomendacji od Meta.
 
-#### Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
+#### [Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models](https://arxiv.org/pdf/2409.04701)
 
 Late Chunking wprowadza nowe podejście do generowania embeddingów chunków tekstu, które zachowuje szersze informacje kontekstowe poprzez przetwarzanie całych dokumentów z modelami embeddingowymi o długim kontekście, aby wytworzyć embeddingi na poziomie tokenów, następnie dzieląc je na chunki. W przeciwieństwie do tradycyjnego chunkowania, które dzieli dokumenty przed embeddingiem, to zapewnia, że każda reprezentacja chunku korzysta z pełnego kontekstu dokumentu. Praca proponuje skalowalne "long late chunking" dla ogromnych dokumentów i wprowadza span pooling fine-tuning dla dalszych ulepszeń.
 
@@ -223,7 +223,7 @@ Late Chunking wprowadza nowe podejście do generowania embeddingów chunków tek
 3. Skalowalne rozwiązanie (long late chunking) dla ogromnych dokumentów przekraczających okna kontekstu modelu
 4. Obliczeniowo bardziej efektywne niż alternatywy augmentacji kontekstowej oparte na LLM z natychmiastową stosowalnością w praktyce
 
-#### Imperceptible Jailbreaking against Large Language Models
+#### [Imperceptible Jailbreaking against Large Language Models](https://arxiv.org/pdf/2510.05025)
 
 Ta praca wprowadza imperceptible jailbreaks wykorzystujące niewidoczne selektory wariacji Unicode do dołączania wrogich sufiksów do promptów. Ataki tworzą niewidoczne zmiany, które wpływają na wejście tokenizera, pozostając niewidzialne dla ludzkich czytelników, efektywnie omijając uzgadnianie* bezpieczeństwa różnych open-source LLM. Pipeline optymalizacji chain-of-search wydajnie generuje udane, niewidoczne sufiksy dla różnych promptów i modeli, z wysoką szansą sukcesu w generowaniu szkodliwych outputów i prompt injection.
 

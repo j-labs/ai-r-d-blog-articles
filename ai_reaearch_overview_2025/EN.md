@@ -8,7 +8,7 @@ This group represents fundamental advances in how neural networks handle sequent
 
 ### Papers
 
-#### It's All Connected: A Journey Through Test-Time Memorization, Attentional Bias, Retention and Online Optimization
+#### [It's All Connected: A Journey Through Test-Time Memorization, Attentional Bias, Retention and Online Optimization](https://arxiv.org/pdf/2504.13173)
 
 This paper presents Miras, a framework that abstracts modern sequence models (Transformers, Titans, linear RNNs, etc.) as memory modules with attentional bias that optimize internal objectives. The framework reveals that most existing architectures use either dot-product similarity or L2 regression, and is built on four design choices: associative memory architecture, attentional bias objective, retention gates (reinterpreting forget gates as retention regularization) and memory learning algorithms. Building on these insights, the authors propose three novel sequence models: Moneta, Yaad and Memora, that use alternative attentional biases (Lp-norm, Huber loss) and retention mechanisms (in essence a forget gate; Lp-norm, KL-divergence), demonstrating promising* performance on language modeling, common-sense reasoning and recall-intensive tasks with improved scaling patterns.
 
@@ -21,7 +21,7 @@ This paper presents Miras, a framework that abstracts modern sequence models (Tr
 
 **Note: Memora performs the worst in explored parameter ranges, but has the strongest stability guarantees, so potentially might be easier to train at scale.
 
-#### Titans: Learning to Memorize at Test Time
+#### [Titans: Learning to Memorize at Test Time](https://arxiv.org/pdf/2501.00663)
 
 Titans introduces a family of architectures featuring a novel neural long-term memory module that learns to memorize at test time using gradient-based updates with momentum and weight decay. The architecture treats surprising events as more memorable and proposes three variants: Memory as Context (MAC)*, Memory as Gate (MAG), and Memory as Layer (MAL). These combine neural memory for long-term context with attention for short-term dependencies and persistent memory for task knowledge, addressing the quadratic complexity of Transformers and poor compression of linear recurrent models.
 
@@ -32,7 +32,7 @@ Titans introduces a family of architectures featuring a novel neural long-term m
 2. Three architectural variants (MAC, MAG, MAL) that integrate long-term memory with attention via different mechanisms
 3. Effective scaling to 2M+ context windows with competitive results against competing architectures
 
-#### Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues
+#### [Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues](https://arxiv.org/pdf/2411.12537)
 
 This paper identifies and resolves a fundamental limitation in modern Linear Recurrent Neural Networks (LRNNs) like Mamba and DeltaNet: their inability to perform state-tracking tasks due to eigenvalue restrictions. The authors prove that LRNNs with state-transition matrix* eigenvalues restricted to [0, 1] cannot solve tasks like parity and modular counting in finite precision, and that non-triangular matrices are needed for general modular counting. Critically, they demonstrate that expanding the eigenvalue range to [−1, 1] dramatically enhances expressive power, enabling LRNNs to solve all regular languages** through products of generalized Householder matrices***.
 
@@ -55,7 +55,7 @@ As language models scale to billions of parameters and multi-million token conte
 
 ### Papers
 
-#### DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention
+#### [DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/main/DeepSeek_V3_2.pdf)
 
 DeepSeek-V3.2-Exp introduces DeepSeek Sparse Attention (DSA), which uses a lightning indexer and fine-grained token selection* to implement efficient sparse attention. The model is created through continued training of DeepSeek-V3.1-Terminus, following a pipeline of continual pre-training (dense warm-up**, sparse adaptation) and two stage post-training. Proposed attention architecture significantly reduces computation costs (each query token attends to a small, fixed subset of keys), especially for very long contexts, while maintaining comparable performance across general, code, math and agentic search tasks.
 
@@ -67,7 +67,7 @@ DeepSeek-V3.2-Exp introduces DeepSeek Sparse Attention (DSA), which uses a light
 2. Comprehensive training pipeline that allows transitioning previously trained model to sparsity
 3. Huge reduction in inference costs for long-context scenarios without accuracy degradation
 
-#### Gated Attention for Large Language Models: Non-linearity, Sparsity and Attention-Sink-Free
+#### [Gated Attention for Large Language Models: Non-linearity, Sparsity and Attention-Sink-Free](https://arxiv.org/pdf/2505.06708)
 
 This work systematically investigates integrating gating mechanisms into attention layers of large language models through experiments across many model variants (including 15B MoE and 1.7B dense models) trained on up to 3.5 trillion tokens. The study introduces a simple head-specific sigmoid gate after Scaled Dot-Product Attention, revealing two key improvement mechanisms: increased expressiveness via non-linearity between attention and output layers, and input-dependent sparsity* that eliminates the "attention sink" effect.
 
@@ -80,7 +80,7 @@ This work systematically investigates integrating gating mechanisms into attenti
 
 **Note: thanks to savings in precision of attention scores previously wasted on massive sink score.
 
-#### REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding
+#### [REFUSION: A Diffusion Large Language Model with Parallel Autoregressive Decoding](https://arxiv.org/pdf/2512.13586)
 
 REFUSION introduces a novel LLM framework combining masked diffusion model (MDM) parallelism with slot-level autoregressive infilling*. The architecture partitions sequences into fixed-length slots and employs a two-stage "plan-and-infill" decoding: diffusion-based global planning identifies weakly dependent slots for parallel processing**, then autoregressive infilling generates tokens within each slot sequentially. This enables full reuse of key-value caches while avoiding token-level incoherence, trained with a hybrid objective optimizing both global planning and local infilling.
 
@@ -92,7 +92,7 @@ REFUSION introduces a novel LLM framework combining masked diffusion model (MDM)
 2. Two-stage plan-and-infill decoding algorithm enabling efficient parallelization without quality loss
 3. Full KV cache reusability increasing efficiency by 2.33× over a purely autoregressive baseline
 
-#### SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity
+#### [SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity](https://arxiv.org/pdf/2506.16500)
 
 SparseLoRA accelerates LLM fine-tuning by leveraging contextual sparsity, dynamically selecting sparse weight subsets for gradient and loss computations using a training-free SVD-based sparsity estimator. The method applies sparsity selectively across layers, tokens and training steps* with minimal overhead. Unlike prior PEFT approaches that primarily reduce memory, SparseLoRA directly improves compute efficiency.
 
@@ -114,7 +114,7 @@ This group demonstrates the maturation of foundation models beyond text, establi
 
 ### Papers
 
-#### SAM Audio: Segment Anything in Audio
+#### [SAM Audio: Segment Anything in Audio](https://arxiv.org/pdf/2512.18099)
 
 SAM Audio is a foundation model for general audio separation that unifies text, visual, and temporal span prompting within a single diffusion transformer architecture. Built on flow matching* and trained on large-scale audio data spanning speech, music and general sounds, it achieves state-of-the-art performance across diverse benchmarks. The paper introduces span prompting as a novel temporal conditioning mechanism and releases SAM Audio-Bench (comprehensive multimodal separation benchmark with human-labeled prompts) and SAM Audio Judge (reference-free evaluation model strongly correlated with human judgment).
 
@@ -124,7 +124,7 @@ SAM Audio is a foundation model for general audio separation that unifies text, 
 1. First foundation model achieving SOTA across multiple audio domains (speech, music, general sounds) with unified multimodal prompting
 2. Novel span prompting mechanism for temporal conditioning in audio separation tasks
 
-#### Perception Encoder: The best visual embeddings are not at the output of the network
+#### [Perception Encoder: The best visual embeddings are not at the output of the network](https://arxiv.org/pdf/2504.13181)
 
 Perception Encoder introduces a state-of-the-art vision encoder family discovering that strong general features for diverse downstream tasks exist in intermediate layers of contrastively-trained models, not the output layer. The work develops PEcore (robust image pretraining), PElang (language-aligned variant), and PEspatial (spatially-aligned variant ).
 
@@ -134,7 +134,7 @@ Perception Encoder introduces a state-of-the-art vision encoder family discoveri
 3. Task-specific alignment strategies (language and spatial) achieving SOTA on detection, VQA and video understanding
 4. Release of 2B parameter model, code, and PE Video Dataset (1M videos, 120K human-refined annotations)
 
-#### One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation
+#### [One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation](https://arxiv.org/pdf/2512.07829)
 
 This paper introduces FAE (Feature Auto-Encoder), a minimalist framework adapting pretrained self-supervised visual representations (DINOv2, SigLIP)* into low-dimensional latents for generative models. The key innovation is using a single self-attention layer to compress high-dimensional embeddings, followed by a double-decoder architecture separating feature reconstruction from image synthesis. This approach overcomes incompatibility between understanding-oriented feature spaces and generation-friendly latents without complex objectives or substantial architectural changes.
 
@@ -156,7 +156,7 @@ This group represents a fundamental rethinking of how AI systems approach comple
 
 ### Papers
 
-#### ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration
+#### [ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/pdf/2511.21689)
 
 ToolOrchestra introduces a methodology for training small language models to serve as orchestration agents managing both traditional tools (web search, code interpreters) and diverse domain-specialized and general-purpose LLMs as external tools. The Orchestrator-8B model is trained end-to-end via reinforcement learning, guided by outcome correctness, efficiency (cost and latency) and user preference alignment. The approach includes ToolScale, a large synthetic benchmark for multi-turn tool-use agent tasks, achieving superior performance and cost efficiency over monolithic LLMs including GPT-5.
 
@@ -166,7 +166,7 @@ ToolOrchestra introduces a methodology for training small language models to ser
 3. Dramatic efficiency gains: 8B orchestrator outperforms substantially larger models at fraction of compute cost
 4. Strong generalization to unseen tools, tasks and user preferences tested with ToolScale benchmark
 
-#### Less is More: Recursive Reasoning with Tiny Networks
+#### [Less is More: Recursive Reasoning with Tiny Networks](https://arxiv.org/pdf/2510.04871)
 
 This paper introduces Tiny Recursive Model (TRM), a simplified recursive reasoning architecture using a single tiny (2-layer, 7M parameter) neural network that outperforms both Hierarchical Reasoning Model (HRM) and large language models on challenging tasks like Sudoku, Maze, and ARC-AGI with minimal training data (~1,000 examples). Unlike HRM's complex dual-network hierarchy, TRM uses an elegant single-network design alternating between latent state updates and solution refinement with deep supervision and simple halting criteria.
 
@@ -176,7 +176,7 @@ This paper introduces Tiny Recursive Model (TRM), a simplified recursive reasoni
 3. Evidence that deep recursion with small networks avoids overfitting and maximizes generalization in small-sample regimes
 4. Challenge to scale-centric paradigm: architectural design over parameter count for structured reasoning
 
-#### LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics
+#### [LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics](https://arxiv.org/pdf/2511.08544)
 
 LeJEPA introduces a theoretically principled framework for self-supervised learning within the Joint-Embedding Predictive Architecture paradigm. The core insight is that isotropic Gaussian embeddings* uniquely minimize downstream prediction risk across broad task families. LeJEPA combines predictive loss with Sketched Isotropic Gaussian Regularization (SIGReg), which provably enforces isotropic Gaussianity using scalable, hyperparameter-light, differentiable projection-based methods, eliminating brittle heuristics like stop-gradient and teacher-student models.
 
@@ -198,7 +198,7 @@ This group addresses the practical challenges of deploying AI systems at an indu
 
 ### Papers
 
-#### OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System
+#### [OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System](https://arxiv.org/pdf/2509.18091)
 
 OnePiece introduces a unified framework enhancing industrial ranking systems by integrating LLM-style context engineering and reasoning. The system enriches input representations via structured context engineering (user history, preference anchors from expert knowledge, situational descriptors, candidate item sets), implements block-wise latent reasoning for multi-step bandwidth-scalable reasoning* and adopts progressive multi-task training** using natural feedback signals (click, add-to-cart, purchase) as supervision for reasoning stages.
 
@@ -214,7 +214,7 @@ OnePiece introduces a unified framework enhancing industrial ranking systems by 
 
 ***Note: DLRM is Shopee's production baseline recommendation model, while HSTU is a state-of-the-art recommendation framework from Meta.
 
-#### Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
+#### [Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models](https://arxiv.org/pdf/2409.04701)
 
 Late Chunking introduces a novel approach to the generation of text chunk embeddings that preserves broader contextual information by processing entire documents with long-context embedding models to produce token-level embeddings, then splitting these into chunks. Unlike traditional chunking that divides documents before embedding, this ensures each chunk representation benefits from the full document context. The paper proposes scalable "long late chunking" for huge documents and introduces span pooling fine-tuning for further improvements.
 
@@ -224,7 +224,7 @@ Late Chunking introduces a novel approach to the generation of text chunk embedd
 3. Scalable solution (long late chunking) for huge documents exceeding model context windows
 4. Computationally more efficient than LLM-based contextual augmentation alternatives with immediate practical applicability
 
-#### Imperceptible Jailbreaking against Large Language Models
+#### [Imperceptible Jailbreaking against Large Language Models](https://arxiv.org/pdf/2510.05025)
 
 This paper introduces imperceptible jailbreaks exploiting invisible Unicode variation selectors to append adversarial suffixes to prompts. The attacks create invisible changes that alter tokenizer input while remaining unperceptible to human readers, effectively bypassing safety alignment* of various open-source LLMs. A chain-of-search optimization pipeline efficiently generates successful invisible suffixes across prompts and models with high success rates in harmful output generation and prompt injection.
 
