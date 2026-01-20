@@ -10,8 +10,8 @@ tweaking prompts.
 The next step is the question: **what do we do with this optimized behavior next?**
 How do we move it into a production environment, where inference cost, latency, and scalability are key?
 
-The answer is the **Teacher–Student** paradigm and **BootstrapFinetune** in DSPy-a mechanism that uses a large model as
-a teacher to automatically generate data and fine-tune smaller, cheaper models.
+The answer is the **Teacher–Student** paradigm and **BootstrapFinetune** in DSPy - a mechanism that uses a large model 
+as a teacher to automatically generate data and fine-tune smaller, cheaper models.
 
 In this article, I discuss how BootstrapFinetune implements knowledge distillation in practice, what benefits it brings,
 and what design trade-offs are worth considering.
@@ -69,8 +69,8 @@ to a smaller and cheaper production model.
 
 ## What BootstrapFinetune Is
 
-**BootstrapFinetune** is a DSPy optimizer whose goal is to transform a prompt-based program into a program based on *
-*trained model weights**.
+**BootstrapFinetune** is a DSPy optimizer whose goal is to transform a prompt-based program into a program based on 
+**trained model weights**.
 
 The output is not a single fine-tuned model, but a **full DSPy program** that:
 
@@ -263,9 +263,9 @@ The result is a new model checkpoint that DSPy treats as another `LM`.
 
 While this approach works technically, its limitations show up quickly in practice. Training directly on raw
 `transformers` and `trl` requires manual hyperparameter tuning for a specific model and GPU, which easily leads to
-memory issues (OOM), low performance, difficulty fine-tuning quantized models, or unstable quality. At the same time,
-you lose part of the abstraction that DSPy provides - rather than working at the level of program behavior and
-distillation, you start debugging details of weight training.
+memory issues (Out-of-memory), low performance, difficulty fine-tuning quantized models, or unstable quality. At the 
+same time, you lose part of the abstraction that DSPy provides - rather than working at the level of program behavior 
+and distillation, you start debugging details of weight training.
 
 Another issue is limited operational control: no convenient resume/retry, interruptions, or a clear answer to the
 question of *what exactly* is being trained and with what configuration. For this reason, `LocalProvider` is best

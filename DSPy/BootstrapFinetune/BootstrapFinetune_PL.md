@@ -267,9 +267,9 @@ opcjonalnie z użyciem technik **PEFT/LoRA**. Wynikiem jest nowy checkpoint mode
 
 Choć takie podejście działa technicznie, w praktyce szybko ujawniają się jego ograniczenia. Trening oparty bezpośrednio
 o gołe `transformers` i `trl` wymaga ręcznego dostrajania hiperparametrów pod konkretny model i GPU, co łatwo prowadzi
-do problemów z pamięcią (OOM), niskiej wydajności, problemami z fine-tuningiem modeli zkwantyzowanych lub niestabilnej
-jakości. Jednocześnie traci się część abstrakcji, którą oferuje DSPy - zamiast pracować na poziomie programu i
-destylacji zachowania, użytkownik zaczyna debugować szczegóły treningu wag.
+do problemów z pamięcią (Out-of-memory), niskiej wydajności, problemami z fine-tuningiem modeli zkwantyzowanych lub 
+niestabilnej jakości. Jednocześnie traci się część abstrakcji, którą oferuje DSPy - zamiast pracować na poziomie 
+programu i destylacji zachowania, użytkownik zaczyna debugować szczegóły treningu wag.
 
 Dodatkowym problemem jest ograniczona kontrola operacyjna: brak wygodnego wznawiania treningu, przerwań czy
 jednoznacznej odpowiedzi na pytanie, *co dokładnie* i w jakiej konfiguracji jest trenowane. Z tego powodu
