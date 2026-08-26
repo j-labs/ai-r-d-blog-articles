@@ -42,7 +42,7 @@ signature = dspy.Signature(
 # Create a module with a strategy
 react = dspy.ReAct(signature, tools=[semantic_search], max_iters=20)
 
-print(react("Who flew over the cuckoo nest in 1975?"))
+print(react(question="Who flew over the cuckoo nest in 1975?"))
 # Prediction(
 #   titles=["Article Title 1", "Article Title 2", "Article Title 3"]
 # )
@@ -112,11 +112,11 @@ class RAGAgent(dspy.Module):
             signature="question, articles: list[str] -> answer"
         )
 
-    def forward(self, question: str) -> tuple[Prediction, list[str]]:
+    def forward(self, question: str) -> tuple[dspy.Prediction, list[str]]:
         """
         This is the main entry point for the module that defines the pipeline and can be an arbitrary Python code.
         """
-        titles = self.retrieval(question=question)
+        titles = self.retrieval(question=question).titles
         articles = [get_article(title) for title in titles]
         answer = self.answer(question=question, articles=articles)
         return answer, articles
@@ -130,7 +130,7 @@ class RAGAgent(dspy.Module):
 - Wybieranie efektywnych strategii promptowania
 - Bootstrapping z udanych wykonań
 
-Najbardziej zaawansowanym optimizerem jest obecnie GEPA (Generalized Evolutionary Prompt Adapter), który używa refleksji 
+Jednym z najbardziej zaawansowanych optimizerów promptów w DSPy jest GEPA (Generalized Evolutionary Prompt Adapter), który używa refleksji
 i strategii ewolucyjnych do ulepszania promptów.
 
 ## Proces Optymalizacji
@@ -149,7 +149,7 @@ Metryki mogą zwracać proste score'y lub dostarczać szczegółowy feedback dla
 ```python
 def top5_recall(
     example, pred, trace=None, pred_name=None, pred_trace=None, *args, **kwargs
-) -> float | ScoreWithFeedback:
+) -> float | dspy.Prediction:
     """Compute top-5 recall for document retrieval."""
     gold_titles = example.titles
     recall = sum(
@@ -164,7 +164,7 @@ def top5_recall(
             f"Gold titles: {gold_titles}. "
             f"Predicted titles (top-5): {getattr(pred, 'titles', [])[:5]}"
         )
-        return ScoreWithFeedback(score=recall, feedback=feedback_text)
+        return dspy.Prediction(score=recall, feedback=feedback_text)
 
     return recall
 ```
@@ -204,7 +204,7 @@ class TeacherGuidedJudgedMetric:
         )
         self.judge = dspy.Predict(judge_signature)
 
-    def __call__(self, gold: Example, pred: tuple[Prediction, list[str]],
+    def __call__(self, gold: dspy.Example, pred: tuple[dspy.Prediction, list[str]],
                  trace=None, pred_name=None, pred_trace=None):
         with dspy.context(lm=self.teacher_lm):
             teacher_answer = self.teacher(
@@ -226,7 +226,7 @@ class TeacherGuidedJudgedMetric:
                 f"Predicted answer: {pred[0].answer}. "
                 f"Context: {pred[1]}"
             )
-            return ScoreWithFeedback(score=score, feedback=feedback_text)
+            return dspy.Prediction(score=score, feedback=feedback_text)
 
         return score
 ```
@@ -237,7 +237,7 @@ Gdy metryka jest zdefiniowana, optymalizacja jest prosta:
 
 ```python
 # Configure language model
-gpt = dspy.LM("openai/gpt-4.1-nano", max_tokens=8000)
+gpt = dspy.LM("openai/gpt-5.6-luna", max_tokens=8000)
 
 # Prepare evaluation
 evaluate = dspy.Evaluate(
@@ -253,7 +253,7 @@ with dspy.context(lm=gpt):
         metric=top5_recall,
         auto="medium",
         num_threads=2,
-        reflection_lm=dspy.LM("openai/gpt-4.1", temperature=1.0, max_tokens=8000)
+        reflection_lm=dspy.LM("openai/gpt-5.6-sol", max_tokens=8000)
     )
     optimized_react = gepa_optimizer.compile(
         react,  # the ReAct module from the beginning of this blogpost
@@ -261,14 +261,18 @@ with dspy.context(lm=gpt):
         valset=devset
     )
 
+# Evaluate the optimized module
+evaluate(optimized_react)
+
 # Save the optimized module
 optimized_react.save("optimized_react.json")
 ```
 
 Optimizer eksploruje przestrzeń możliwych instrukcji i demonstracji (przykładów z zestawu treningowego), 
 używając walidacyjnego zestawu do wyboru najlepszej konfiguracji. Można realizować w ten sposób optymalizację złożonych 
-przypadków, jak np. wielopoziomowych modułów. Produktem optymalizacji jest nowy prompt w formacie JSON, który może być 
-łatwo załadowany do kompatybilnej instancji modułu DSPy.
+przypadków, jak np. wielopoziomowych modułów. Produktem optymalizacji jest stan skompilowanego modułu, zawierający
+zoptymalizowane instrukcje oraz, zależnie od optimizera, demonstracje. Można zapisać go jako JSON i łatwo załadować
+do kompatybilnej instancji modułu DSPy.
 
 ## Komponowanie Pipeline'ów
 
@@ -277,7 +281,7 @@ Cały pipeline może być optymalizowany end-to-end. Kontrastuje to z optymaliza
 ze wcześniejszych przykładów.
 
 ```python
-agent = RAGAgent("optimized_react.json", "optimized_cot.json")
+agent = RAGAgent("optimized_react.json")
 
 # Optimize the complete RAG pipeline
 with dspy.context(lm=gpt):
